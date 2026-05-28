@@ -1,14 +1,19 @@
 # Solución del proyecto
 
-- **Proyecto:** <!-- Nombre del proyecto -->
-- **Alumno/a:** <!-- Nombre y apellidos -->
-- **Repositorio:** <!-- URL del repositorio -->
+- **Proyecto:** <!-- Nombre del proyecto --> Gestión de Equipo Pokémon
+- **Alumno/a:** <!-- Nombre y apellidos --> Óscar García Jaén
+- **Repositorio:** <!-- URL del repositorio --> https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen
 
 ## 1. Resumen del proyecto
 
-- **Problema que resuelve:** <!-- Explicación breve -->
-- **Usuarios principales:** <!-- A quién va dirigido -->
-- **Funcionalidades principales:** <!-- Lista breve -->
+- **Problema que resuelve:** <!-- Explicación breve --> Te permite mantener un control de los Pokemon capturados y puedes desarrollar el equipo a partir de ellos.
+- **Usuarios principales:** <!-- A quién va dirigido --> Principalmente este programa va dirigidos a los jugadores de la franquicia Pokémon.
+- **Funcionalidades principales:** <!-- Lista breve --> 
+  - Registrar Pokémon
+  - Actualizar Pokémon
+  - Eliminar Pokémon
+  - Listar Pokémon
+  - Crear Equipo
 - **Entidades principales:** <!-- Clases o conceptos del dominio -->
 - **Estructura del proyecto:** <!-- Paquetes principales y responsabilidad -->
 
