@@ -1,5 +1,6 @@
 package org.iesra.app
 
+import org.example.Modelo.Pokemon
 import org.example.Modelo.Tipo
 
 object Console {
@@ -72,6 +73,25 @@ object Console {
             }
         } while (tipo2 == null)
         return tipo2
+    }
+
+    fun solicitarId(): Int {
+        var id: Int? = null
+
+        do {
+            println("Introduce el ID del Pokémon que quieres eliminar")
+            val entrada = readLine()?.trim()
+            if (entrada != null && entrada.all { it.isDigit() }) {
+                id = entrada.toInt()
+            }
+        } while (id == null)
+        return id
+    }
+
+    fun mostrarTodos(listaPokemon: List<Pokemon>){
+        listaPokemon.forEach {
+            println(it)
+        }
     }
 
     private fun mostrarMenu(){

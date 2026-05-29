@@ -14,11 +14,11 @@ class RepositorioSQL(conexion: Connection?) : IRepositorySQL {
     }
 
     override fun delete(id: Int) {
-        dao.delete(id)
+        dao.delete(connection, id)
     }
 
     override fun listarPokemon(): List<Pokemon> {
-        val listaPokemon = listOf<Pokemon>()
+        val listaPokemon = dao.listarTodos(connection)
         return listaPokemon
     }
 
