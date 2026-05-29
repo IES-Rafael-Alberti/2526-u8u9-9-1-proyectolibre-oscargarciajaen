@@ -23,7 +23,7 @@ object Console {
 
         var nombre: String? = null
         do {
-            println("Introduce el nombre del pokemon que quieres registrar: ")
+            println("Introduce el nombre del pokemon: ")
             val entrada = readLine()?.trim()
             if (!entrada.isNullOrBlank()) {
                 nombre = entrada
@@ -82,7 +82,7 @@ object Console {
         println("Elige una opción: ")
         println()
         println("1. Registrar un Pokémon")
-        println("2. Actualizar datos de un Pokémon")
+        println("2. Actualizar tipos de un Pokémon")
         println("3. Eliminar Pokémon")
         println("4. Listar Pokémon")
         println("5. Generar equipo Pokémon aleatorio")
