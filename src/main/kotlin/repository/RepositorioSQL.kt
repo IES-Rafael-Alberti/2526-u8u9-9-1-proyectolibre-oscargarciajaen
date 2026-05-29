@@ -16,7 +16,7 @@ class RepositorioSQL() : IRepositorySQL {
     }
 
     override fun listarPokemon(): List<Pokemon> {
-        val listaPokemon = dao.listarTodos()
+        val listaPokemon = listOf<Pokemon>()
         return listaPokemon
     }
 
