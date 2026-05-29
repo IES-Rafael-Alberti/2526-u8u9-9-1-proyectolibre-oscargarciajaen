@@ -1,12 +1,12 @@
-package org.example.Presentacion
+package org.iesra.app
 
 import org.example.Modelo.Tipo
 
-object Consola {
+object Console {
 
     fun solicitarOpcion(): String{
 
-        val opciones = listOf("1", "2", "3", "4", "5")
+        val opciones = listOf("1", "2", "3", "4", "5", "6")
         var opcion: String? = null
         do {
             mostrarMenu()
@@ -82,10 +82,11 @@ object Consola {
         println("Elige una opción: ")
         println()
         println("1. Registrar un Pokémon")
-        println("2. Actualizar datos de un pokémon")
+        println("2. Actualizar datos de un Pokémon")
         println("3. Eliminar Pokémon")
         println("4. Listar Pokémon")
-        println("5. Salir")
+        println("5. Generar equipo Pokémon aleatorio")
+        println("6. Salir")
         println()
         print("Tu opcion -> ")
     }

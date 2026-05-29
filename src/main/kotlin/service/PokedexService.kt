@@ -1,12 +1,12 @@
 package org.example.Service
 
 import org.example.Modelo.Pokemon
-import org.example.Presentacion.Consola
+import org.iesra.app.Console
 
 object PokedexService {
 
     fun ejecutar(){
-        val consola = Consola
+        val consola = Console
         val opcion = consola.solicitarOpcion()
         if (opcion == "1") {
             val nombre = consola.solicitarNombrePokemon()
