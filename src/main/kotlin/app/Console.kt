@@ -1,6 +1,6 @@
 package org.iesra.app
 
-import org.example.Modelo.Pokemon
+import model.Pokemon
 import org.example.Modelo.Tipo
 
 object Console {
@@ -47,33 +47,25 @@ object Console {
         return tipos
     }
 
-    private fun solicitarTipo(): Tipo {
-        val listaTipos = Tipo.values()
-        println("Introduce el primer tipo del Pokémon en formato 'Acero' :")
-        val entrada = readLine()?.trim()
-        listaTipos.forEach {
-            if (entrada == it.toString()){
-                return it
-            }
-        }
-        return Tipo.False
-    }
-
-    private fun solicitarTipo(tipo1: Tipo): Tipo {
-        val listaTipos = Tipo.values()
-        var tipo2: Tipo? = null
-
+    fun solicitarLista(): String {
+        var opcion: String? = null
         do {
-            println("Introduce el segundo tipo del Pokémon en formato 'Acero' (no repitas tipo) o 'False' en caso de que solo tenga un tipo:")
-            val entrada = readLine()?.trim()
-            listaTipos.forEach {
-                if (entrada == it.toString() && entrada != tipo1.toString()){
-                    tipo2 = it
-                }
-            }
-        } while (tipo2 == null)
-        return tipo2
+            println("1. Listar Pokémon registrados")
+            println("2. Listar Pokémon capturados")
+            println()
+            print("Introduzca su opción -> ")
+            val entrada = readLine()
+            if (entrada == "1" || entrada == "2") {
+                opcion = entrada
+            } else
+                println("Opción no válida.\n")
+        } while (opcion == null)
+        return opcion
     }
+
+
+
+
 
     fun solicitarId(): Int {
         var id: Int? = null
@@ -94,6 +86,22 @@ object Console {
         }
     }
 
+    fun solicitarTipoRegistro(): String {
+        var opcion: String? = null
+        do {
+            println("1. Registrar en la Pokedex")
+            println("2. Registrar en la Pokedex y Capturar")
+            println()
+            print("Introduzca su opción -> ")
+            val entrada = readLine()
+            if (entrada == "1" || entrada == "2") {
+                opcion = entrada
+            } else
+                println("Opción no válida.\n")
+        } while (opcion == null)
+        return opcion
+    }
+
     private fun mostrarMenu(){
         println("###################")
         println("#     Pokedex     #")
@@ -109,5 +117,35 @@ object Console {
         println("6. Salir")
         println()
         print("Tu opcion -> ")
+    }
+
+
+
+    private fun solicitarTipo(tipo1: Tipo): Tipo {
+        val listaTipos = Tipo.values()
+        var tipo2: Tipo? = null
+
+        do {
+            println("Introduce el segundo tipo del Pokémon en formato 'Acero' (no repitas tipo) o 'False' en caso de que solo tenga un tipo:")
+            val entrada = readLine()?.trim()
+            listaTipos.forEach {
+                if (entrada == it.toString() && entrada != tipo1.toString()){
+                    tipo2 = it
+                }
+            }
+        } while (tipo2 == null)
+        return tipo2
+    }
+
+    private fun solicitarTipo(): Tipo {
+        val listaTipos = Tipo.values()
+        println("Introduce el primer tipo del Pokémon en formato 'Acero' :")
+        val entrada = readLine()?.trim()
+        listaTipos.forEach {
+            if (entrada == it.toString()){
+                return it
+            }
+        }
+        return Tipo.False
     }
 }

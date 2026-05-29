@@ -1,6 +1,6 @@
 package repository
 
-import org.example.Modelo.Pokemon
+import model.Pokemon
 import repository.Dao.DaoSQL
 import java.sql.Connection
 
@@ -10,15 +10,21 @@ class RepositorioSQL(conexion: Connection?) : IRepositorySQL {
     val connection = conexion
 
     override fun save(entity: Pokemon) {
-        dao.save(connection, entity)
+        dao.saveAvistado(connection, entity)
     }
+
+    fun saveCaptura(entity: Pokemon) {
+        dao.saveAvistado(connection, entity)
+        dao.saveCaptura(connection, entity)
+    }
+
 
     override fun delete(id: Int) {
         dao.delete(connection, id)
     }
 
-    override fun listarPokemon(): List<Pokemon> {
-        val listaPokemon = dao.listarTodos(connection)
+    override fun listarPokemonRegistrados(): List<Pokemon> {
+        val listaPokemon = dao.listarPokemonRegistrados(connection)
         return listaPokemon
     }
 

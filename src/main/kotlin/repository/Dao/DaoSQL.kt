@@ -1,14 +1,34 @@
 package repository.Dao
 
-import org.example.Modelo.Pokemon
+import model.Pokemon
 import org.example.Modelo.Tipo
 import java.sql.Connection
 import java.sql.SQLException
+import kotlin.use
 
 class DaoSQL {
 
-    fun save(conexion: Connection?, entity: Pokemon) {
-        val sql = "INSERT INTO POKEMON (nombre, tipo1, tipo2) VALUES (?, ?, ?)"
+    fun saveAvistado(conexion: Connection?, entity: Pokemon) {
+        val sql = "INSERT INTO REGISTRADOS (nombre, tipo1, tipo2) VALUES (?, ?, ?)"
+
+        if (conexion != null) {
+            try {
+                conexion.prepareStatement(sql).use { statement ->
+
+                    statement.setString(1, entity.nombre)
+                    statement.setString(2, entity.tipo1.toString())
+                    statement.setString(3, entity.tipo2.toString())
+
+                    statement.executeUpdate()
+                }
+            } catch (e: SQLException) {
+                println("Error al guardar el Pokémon: ${e.message}")
+            }
+        }
+    }
+
+    fun saveCaptura(conexion: Connection?, entity: Pokemon) {
+        val sql = "INSERT INTO CAPTURADOS (nombre, tipo1, tipo2) VALUES (?, ?, ?)"
 
         if (conexion != null) {
             try {
@@ -43,13 +63,13 @@ class DaoSQL {
         }
     }
 
-    fun listarTodos(conexion: Connection?): List<Pokemon>{
+    fun listarPokemonRegistrados(conexion: Connection?): List<Pokemon>{
 
         var listaPokemon = mutableListOf<Pokemon>()
 
         if (conexion != null) {
 
-            val sql = "SELECT * FROM POKEMON"
+            val sql = "SELECT * FROM REGISTRADOS"
 
             try {
                 conexion.prepareStatement(sql).use { statement ->
@@ -58,7 +78,6 @@ class DaoSQL {
 
                     while (resultSet?.next() == true) {
 
-                        val id = resultSet.getInt("id")
                         val nombre = resultSet.getString("nombre")
 
                         val tipo1String = resultSet.getString("tipo1")
@@ -68,7 +87,7 @@ class DaoSQL {
                         val tipo2 = Tipo.valueOf(tipo2String)
 
 
-                        val pokemon = Pokemon(id, nombre, tipo1, tipo2)
+                        val pokemon = Pokemon(nombre, tipo1, tipo2)
 
                         listaPokemon.add(pokemon)
                     }

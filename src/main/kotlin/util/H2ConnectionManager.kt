@@ -26,11 +26,17 @@ class H2ConnectionManager() {
             try {
                 conexion.createStatement().use { statement ->
                     val sql = """
-                    CREATE TABLE IF NOT EXISTS Pokemon (
+                    CREATE TABLE IF NOT EXISTS Capturados (
                         id INT AUTO_INCREMENT PRIMARY KEY,
-                        nombre VARCHAR(255) NOT NULL,
-                        tipo1 VARCHAR(255) NOT NULL,
-                        tipo2 VARCHAR(255) NOT NULL
+                        nombre VARCHAR(17) NOT NULL,
+                        tipo1 VARCHAR(8) NOT NULL,
+                        tipo2 VARCHAR(8) NOT NULL
+                    );
+                    
+                    CREATE TABLE IF NOT EXISTS Registrados (
+                        nombre VARCHAR(17) PRIMARY KEY,
+                        tipo1 VARCHAR(8) NOT NULL,
+                        tipo2 VARCHAR(8) NOT NULL
                     );
                 """.trimIndent()
                     statement?.execute(sql)

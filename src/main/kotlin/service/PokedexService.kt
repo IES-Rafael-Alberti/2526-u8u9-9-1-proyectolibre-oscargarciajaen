@@ -1,6 +1,6 @@
 package org.example.Service
 
-import org.example.Modelo.Pokemon
+import model.Pokemon
 import org.iesra.app.Console
 import repository.RepositorioSQL
 import util.H2ConnectionManager
@@ -19,10 +19,23 @@ object PokedexService {
         do {
             opcion = consola.solicitarOpcion()
             if (opcion == "1") {
-                val nombre = consola.solicitarNombrePokemon()
-                val tipos = consola.obtenerTipos()
-                val pokemon = Pokemon(nombre = nombre, tipo1 = tipos.first, tipo2 = tipos.second)
-                repoSql.save(pokemon)
+                val opcion = consola.solicitarTipoRegistro()
+                when (opcion) {
+                    "1" -> {
+                        val nombre = consola.solicitarNombrePokemon()
+                        val tipos = consola.obtenerTipos()
+                        val pokemon = Pokemon(nombre = nombre, tipo1 = tipos.first, tipo2 = tipos.second)
+                        repoSql.save(pokemon)
+                    }
+
+                    "2" -> {
+                        val nombre = consola.solicitarNombrePokemon()
+                        val tipos = consola.obtenerTipos()
+                        val pokemon = Pokemon(nombre = nombre, tipo1 = tipos.first, tipo2 = tipos.second)
+                        repoSql.saveCaptura(pokemon)
+                    }
+                }
+
             } else if (opcion == "2") {
                 val nombre = consola.solicitarNombrePokemon()
                 val tipos = consola.obtenerTipos()
@@ -32,8 +45,20 @@ object PokedexService {
                 val id = consola.solicitarId()
                 repoSql.delete(id)
             }else if (opcion == "4"){
-                val listaPokemon = repoSql.listarPokemon()
-                consola.mostrarTodos(listaPokemon)
+                val opcion = consola.solicitarLista()
+                when (opcion) {
+                    "1" -> {
+                        val listaPokemon = repoSql.listarPokemonRegistrados()
+                        consola.mostrarTodos(listaPokemon)
+                    }
+                    "2" -> {
+                        val nombre = consola.solicitarNombrePokemon()
+                        val tipos = consola.obtenerTipos()
+                        val pokemon = Pokemon(nombre = nombre, tipo1 = tipos.first, tipo2 = tipos.second)
+                        repoSql.saveCaptura(pokemon)
+                    }
+                }
+
             }
 
         } while (opcion != "6")

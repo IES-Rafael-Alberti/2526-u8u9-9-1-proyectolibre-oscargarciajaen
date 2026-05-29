@@ -1,12 +1,12 @@
 package repository
 
-import org.example.Modelo.Pokemon
+import model.Pokemon
 
-interface IRepositorySQL : IRepository<Pokemon> {
-    override fun save(entity: Pokemon)
+interface IRepositorySQL {
+    fun save(entity: Pokemon)
     fun delete(id: Int)
     fun update(entity: Pokemon)
-    fun listarPokemon(): List<Pokemon>
+    fun listarPokemonRegistrados(): List<Pokemon>
 
 
 
