@@ -63,10 +63,6 @@ object Console {
         return opcion
     }
 
-
-
-
-
     fun solicitarId(): Int {
         var id: Int? = null
 
@@ -84,6 +80,7 @@ object Console {
         listaPokemon.forEach {
             println(it)
         }
+        println()
     }
 
     fun solicitarTipoRegistro(): String {
@@ -111,15 +108,13 @@ object Console {
         println()
         println("1. Registrar un Pokémon")
         println("2. Actualizar tipos de un Pokémon")
-        println("3. Eliminar Pokémon")
+        println("3. Liberar Pokémon")
         println("4. Listar Pokémon")
         println("5. Generar equipo Pokémon aleatorio")
         println("6. Salir")
         println()
         print("Tu opcion -> ")
     }
-
-
 
     private fun solicitarTipo(tipo1: Tipo): Tipo {
         val listaTipos = Tipo.values()

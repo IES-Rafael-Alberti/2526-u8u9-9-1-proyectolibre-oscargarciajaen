@@ -99,8 +99,46 @@ class DaoSQL {
         return listaPokemon
     }
 
+    fun listarPokemonCapturados(conexion: Connection?): List<Pokemon>{
+
+        var listaPokemon = mutableListOf<Pokemon>()
+
+        if (conexion != null) {
+
+            val sql = "SELECT * FROM CAPTURADOS"
+
+            try {
+                conexion.prepareStatement(sql).use { statement ->
+
+                    val resultSet = statement?.executeQuery()
+
+                    while (resultSet?.next() == true) {
+                        val id = resultSet.getInt("id")
+                        val nombre = resultSet.getString("nombre")
+
+                        val tipo1String = resultSet.getString("tipo1")
+                        val tipo2String = resultSet.getString("tipo2")
+
+                        val tipo1 = Tipo.valueOf(tipo1String)
+                        val tipo2 = Tipo.valueOf(tipo2String)
+
+
+                        val pokemon = Pokemon(id, nombre, tipo1, tipo2)
+
+                        listaPokemon.add(pokemon)
+                    }
+                }
+            } catch (e: SQLException) {
+                println("Error al listar: ${e.message}")
+            }
+        }
+        return listaPokemon
+    }
+
+
+
     fun update(conexion: Connection?, entity: Pokemon){
-        val sql = "UPDATE POKEMON SET tipo1 = ?, tipo2 = ? WHERE nombre = ?"
+        val sql = "UPDATE CAPTURADOS SET tipo1 = ?, tipo2 = ? WHERE nombre = ?"
 
         if (conexion != null) {
             try {
@@ -118,6 +156,26 @@ class DaoSQL {
                 println("Error al actualizar el Pokémon: ${e.message}")
             }
         }
+    }
 
+    fun updateRegistrados(conexion: Connection?, pokemon: Pokemon){
+        val sql = "UPDATE REGISTRADOS SET tipo1 = ?, tipo2 = ? WHERE nombre = ?"
+
+        if (conexion != null) {
+            try {
+                conexion.prepareStatement(sql).use { statement ->
+
+                    statement.setString(1, pokemon.tipo1.toString())
+                    statement.setString(2, pokemon.tipo2.toString())
+                    statement.setString(3, pokemon.nombre)
+
+                    val filasActualizadas = statement.executeUpdate()
+                    println("Numero de filas actualizadas: $filasActualizadas")
+
+                }
+            } catch (e: SQLException) {
+                println("Error al actualizar el Pokémon: ${e.message}")
+            }
+        }
     }
 }

@@ -52,10 +52,8 @@ object PokedexService {
                         consola.mostrarTodos(listaPokemon)
                     }
                     "2" -> {
-                        val nombre = consola.solicitarNombrePokemon()
-                        val tipos = consola.obtenerTipos()
-                        val pokemon = Pokemon(nombre = nombre, tipo1 = tipos.first, tipo2 = tipos.second)
-                        repoSql.saveCaptura(pokemon)
+                        val listaPokemon = repoSql.listarPokemonCapturados()
+                        consola.mostrarTodos(listaPokemon)
                     }
                 }
 

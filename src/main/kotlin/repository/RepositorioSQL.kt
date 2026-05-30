@@ -28,7 +28,13 @@ class RepositorioSQL(conexion: Connection?) : IRepositorySQL {
         return listaPokemon
     }
 
+    fun listarPokemonCapturados(): List<Pokemon> {
+        val listaPokemon = dao.listarPokemonCapturados(connection)
+        return listaPokemon
+    }
+
     override fun update(entity: Pokemon) {
         dao.update(connection, entity)
+        dao.updateRegistrados(connection, entity)
     }
 }
