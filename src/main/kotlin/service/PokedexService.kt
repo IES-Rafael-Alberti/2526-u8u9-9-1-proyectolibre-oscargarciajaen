@@ -3,6 +3,7 @@ package org.example.Service
 import model.Pokemon
 import org.iesra.app.Console
 import repository.RepositorioSQL
+import repository.RepositorioTxt
 import util.H2ConnectionManager
 
 object PokedexService {
@@ -56,9 +57,34 @@ object PokedexService {
                         consola.mostrarTodos(listaPokemon)
                     }
                 }
+            } else if (opcion == "9") {
+                val listaPokemon = repoSql.listarPokemonCapturados()
+                val listaEquipo = mutableListOf<Pokemon>()
 
+                if (listaPokemon.size <= 6) {
+                    listaPokemon.forEach {
+                        listaEquipo.add(it)
+                    }
+                } else {
+                    val indicesAleatorios = mutableListOf<Int>()
+
+                    while (indicesAleatorios.size < 6) {
+                        val numeroAzar = (0 until listaPokemon.size).random()
+
+                        if (numeroAzar !in indicesAleatorios) {
+                            indicesAleatorios.add(numeroAzar)
+                        }
+                    }
+
+                    indicesAleatorios.forEach { it ->
+                        val pokemonAleatorio = listaPokemon[it]
+                        listaEquipo.add(pokemonAleatorio)
+                    }
+                }
+                val repoTxt = RepositorioTxt()
+                repoTxt.crear()
+                repoTxt.guardar(listaEquipo)
             }
-
-        } while (opcion != "6")
+        } while (opcion != "x" && opcion != "X")
     }
 }

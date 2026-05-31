@@ -7,7 +7,7 @@ import java.sql.SQLException
 class H2ConnectionManager() {
 
     fun create(): Connection? {
-        val url = "jdbc:h2:file:./src/main/kotlin/data/pokemon"
+        val url = "jdbc:h2:file:./src/main/kotlin/data/bd/pokemon"
         val username = "sa"
         val password = "sa"
 
