@@ -76,8 +76,8 @@ object Console {
         return id
     }
 
-    fun mostrarTodos(listaPokemon: List<Pokemon>){
-        listaPokemon.forEach {
+    fun <T> mostrarTodos(lista: List<T>){
+        lista.forEach {
             println(it)
         }
         println()
@@ -140,7 +140,7 @@ object Console {
         println("4. Listar Pokémon")
         println("5. Registrar Objeto")
         println("6. Tirar Objeto")
-        println("7. Actualizar Objeto")
+        println("7. Actualizar cantidad de x Objeto")
         println("8. Listar Objeto")
         println("9. Generar equipo Pokémon aleatorio")
         println()

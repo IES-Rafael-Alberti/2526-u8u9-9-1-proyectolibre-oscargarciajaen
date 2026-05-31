@@ -16,47 +16,19 @@ object PokedexService {
         val consola = Console
         var opcion: String? = null
 
-
         do {
             opcion = consola.solicitarOpcion()
             if (opcion == "1") {
-                val opcion = consola.solicitarTipoRegistro()
-                when (opcion) {
-                    "1" -> {
-                        val nombre = consola.solicitarNombrePokemon()
-                        val tipos = consola.obtenerTipos()
-                        val pokemon = Pokemon(nombre = nombre, tipo1 = tipos.first, tipo2 = tipos.second)
-                        repoSql.save(pokemon)
-                    }
-
-                    "2" -> {
-                        val nombre = consola.solicitarNombrePokemon()
-                        val tipos = consola.obtenerTipos()
-                        val pokemon = Pokemon(nombre = nombre, tipo1 = tipos.first, tipo2 = tipos.second)
-                        repoSql.saveCaptura(pokemon)
-                    }
-                }
-
+                registrar(consola, repoSql)
             } else if (opcion == "2") {
-                val nombre = consola.solicitarNombrePokemon()
-                val tipos = consola.obtenerTipos()
-                val pokemon = Pokemon(nombre = nombre, tipo1 = tipos.first, tipo2 = tipos.second)
-                repoSql.update(pokemon)
+                actualizarPokemon(consola, repoSql)
             } else if (opcion == "3") {
                 val id = consola.solicitarId()
                 repoSql.delete(id)
             }else if (opcion == "4"){
-                val opcion = consola.solicitarLista()
-                when (opcion) {
-                    "1" -> {
-                        val listaPokemon = repoSql.listarPokemonRegistrados()
-                        consola.mostrarTodos(listaPokemon)
-                    }
-                    "2" -> {
-                        val listaPokemon = repoSql.listarPokemonCapturados()
-                        consola.mostrarTodos(listaPokemon)
-                    }
-                }
+                obtenerLista(consola, repoSql)
+            } else if (opcion == "5") {
+
             } else if (opcion == "9") {
                 val listaPokemon = repoSql.listarPokemonCapturados()
                 val listaEquipo = mutableListOf<Pokemon>()
@@ -86,5 +58,45 @@ object PokedexService {
                 repoTxt.guardar(listaEquipo)
             }
         } while (opcion != "x" && opcion != "X")
+    }
+
+    private fun registrar(consola: Console, repoSql: RepositorioSQL){
+        val opcion = consola.solicitarTipoRegistro()
+        when (opcion) {
+            "1" -> {
+                val nombre = consola.solicitarNombrePokemon()
+                val tipos = consola.obtenerTipos()
+                val pokemon = Pokemon(nombre = nombre, tipo1 = tipos.first, tipo2 = tipos.second)
+                repoSql.save(pokemon)
+            }
+
+            "2" -> {
+                val nombre = consola.solicitarNombrePokemon()
+                val tipos = consola.obtenerTipos()
+                val pokemon = Pokemon(nombre = nombre, tipo1 = tipos.first, tipo2 = tipos.second)
+                repoSql.saveCaptura(pokemon)
+            }
+        }
+    }
+
+    private fun actualizarPokemon(consola: Console, repoSql: RepositorioSQL){
+        val nombre = consola.solicitarNombrePokemon()
+        val tipos = consola.obtenerTipos()
+        val pokemon = Pokemon(nombre = nombre, tipo1 = tipos.first, tipo2 = tipos.second)
+        repoSql.update(pokemon)
+    }
+
+    private fun obtenerLista(consola: Console, repoSql: RepositorioSQL){
+        val opcion = consola.solicitarLista()
+        when (opcion) {
+            "1" -> {
+                val listaPokemon = repoSql.listarPokemonRegistrados()
+                consola.mostrarTodos(listaPokemon)
+            }
+            "2" -> {
+                val listaPokemon = repoSql.listarPokemonCapturados()
+                consola.mostrarTodos(listaPokemon)
+            }
+        }
     }
 }
