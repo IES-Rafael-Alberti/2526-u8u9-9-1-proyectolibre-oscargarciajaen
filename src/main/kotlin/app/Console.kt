@@ -7,7 +7,7 @@ object Console {
 
     fun solicitarOpcion(): String{
 
-        val opciones = listOf("1", "2", "3", "4", "5", "6")
+        val opciones = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "X", "x")
         var opcion: String? = null
         do {
             mostrarMenu()
@@ -99,6 +99,34 @@ object Console {
         return opcion
     }
 
+    fun solicitarNombreObjeto(): String {
+
+        var nombre: String? = null
+        do {
+            println("Introduce el nombre del objeto: ")
+            val entrada = readLine()?.trim()
+            if (!entrada.isNullOrBlank()) {
+                nombre = entrada
+            }
+        } while (nombre == null)
+        return nombre
+    }
+
+    fun solicitarCantidad(): Int {
+        var cantidad: Int? = null
+        do {
+            println("Introduce el nombre del objeto: ")
+            val entrada = readLine()?.trim()
+            if (entrada != null && entrada.all { it.isDigit() }) {
+                val entradaInt = entrada.toInt()
+                if (entradaInt > 0 && entradaInt < 100) {
+                    cantidad = entradaInt
+                }
+            }
+        } while (cantidad == null)
+        return cantidad
+    }
+
     private fun mostrarMenu(){
         println("###################")
         println("#     Pokedex     #")
@@ -110,8 +138,13 @@ object Console {
         println("2. Actualizar tipos de un Pokémon")
         println("3. Liberar Pokémon")
         println("4. Listar Pokémon")
-        println("5. Generar equipo Pokémon aleatorio")
-        println("6. Salir")
+        println("5. Registrar Objeto")
+        println("6. Tirar Objeto")
+        println("7. Actualizar Objeto")
+        println("8. Listar Objeto")
+        println("9. Generar equipo Pokémon aleatorio")
+        println()
+        println("Pulsa 'X' para Salir")
         println()
         print("Tu opcion -> ")
     }

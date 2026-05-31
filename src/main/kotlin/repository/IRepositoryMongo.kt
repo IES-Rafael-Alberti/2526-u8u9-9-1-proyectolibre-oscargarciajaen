@@ -1,10 +1,10 @@
 package repository
 
-import model.Pokemon
+import model.Objeto
 
 interface IRepositoryMongo {
-    fun save(entity: Pokemon)
+    fun save(entity: Objeto)
     fun delete(id: Int)
-    fun update(entity: Pokemon)
-    fun mostrarPokemonPorTipo(string: String)
+    fun update(entity: Objeto)
+    fun mostrarObjetos(): List<Objeto>
 }
