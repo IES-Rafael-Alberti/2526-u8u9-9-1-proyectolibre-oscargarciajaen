@@ -46,5 +46,4 @@ class H2ConnectionManager() {
             }
         }
     }
-
 }

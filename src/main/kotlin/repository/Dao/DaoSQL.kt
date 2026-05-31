@@ -46,8 +46,8 @@ class DaoSQL {
         }
     }
 
-    fun delete(conexion: Connection?, id: Int) {
-        val sql = "DELETE FROM POKEMON WHERE ID = ?"
+    fun liberarPokemonCapturado(conexion: Connection?, id: Int) {
+        val sql = "DELETE FROM CAPTURADOS WHERE ID = ?"
 
         if (conexion != null) {
             try {

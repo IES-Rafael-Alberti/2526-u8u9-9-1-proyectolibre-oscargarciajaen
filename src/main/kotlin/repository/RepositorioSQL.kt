@@ -20,7 +20,7 @@ class RepositorioSQL(conexion: Connection?) : IRepositorySQL {
 
 
     override fun delete(id: Int) {
-        dao.delete(connection, id)
+        dao.liberarPokemonCapturado(connection, id)
     }
 
     override fun listarPokemonRegistrados(): List<Pokemon> {
