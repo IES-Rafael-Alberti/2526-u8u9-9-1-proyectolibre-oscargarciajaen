@@ -1,18 +1,24 @@
 package org.example.Service
 
+import model.Objeto
 import model.Pokemon
 import org.iesra.app.Console
+import repository.RepositorioMongo
 import repository.RepositorioSQL
 import repository.RepositorioTxt
 import util.H2ConnectionManager
+import util.MongoConecctionManager
 
 object PokedexService {
 
     fun ejecutar(){
         val h2 = H2ConnectionManager()
         val conexion = h2.create()
+        val mongo = MongoConecctionManager()
+        val conextionMongo = mongo.obtenerMongoDB()
         h2.createTables(conexion)
         val repoSql = RepositorioSQL(conexion)
+        val repoMongo = RepositorioMongo()
         val consola = Console
         var opcion: String? = null
 
@@ -28,7 +34,10 @@ object PokedexService {
             }else if (opcion == "4"){
                 obtenerLista(consola, repoSql)
             } else if (opcion == "5") {
-
+                val nombre = consola.solicitarNombreObjeto()
+                val cantidad = consola.solicitarCantidad()
+                val objeto = Objeto(nombre, cantidad)
+                repoMongo.save(objeto)
             } else if (opcion == "9") {
                 val listaPokemon = repoSql.listarPokemonCapturados()
                 val listaEquipo = mutableListOf<Pokemon>()

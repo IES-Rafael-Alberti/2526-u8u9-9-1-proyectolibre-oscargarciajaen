@@ -1,6 +1,7 @@
 package repository
 
 import model.Objeto
+import util.MongoConecctionManager
 
 interface IRepositoryMongo {
     fun save(entity: Objeto)

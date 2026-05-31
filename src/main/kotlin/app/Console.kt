@@ -115,7 +115,7 @@ object Console {
     fun solicitarCantidad(): Int {
         var cantidad: Int? = null
         do {
-            println("Introduce el nombre del objeto: ")
+            println("Introduce la cantidad del objeto: ")
             val entrada = readLine()?.trim()
             if (entrada != null && entrada.all { it.isDigit() }) {
                 val entradaInt = entrada.toInt()
