@@ -16,10 +16,11 @@ class RepositorioMongo : IRepositoryMongo {
 
     override fun save(entity: Objeto) {
         val databaseActiva = connectionManager.obtenerMongoDB()
-
-        if (databaseActiva != null) {
-            daoMongo.guardarObjeto(databaseActiva, entity)
+        if (databaseActiva == null) {
+            System.err.println("ERROR -> Sin conexión a MongoDB, no se guarda '${entity.nombre}'")
+            return
         }
+        daoMongo.guardarObjeto(databaseActiva, entity)
     }
 
     override fun delete(nombre: String) {

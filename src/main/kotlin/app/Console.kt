@@ -160,6 +160,10 @@ object Console {
         return opcion
     }
 
+    /**
+     * Pinta el menú principal en pantalla con todas las opciones disponibles.
+     * Solo lo usa [solicitarOpcion].
+     */
     private fun mostrarMenu(){
         println("###################")
         println("#     Pokedex     #")
@@ -182,6 +186,13 @@ object Console {
         print("Tu opcion -> ")
     }
 
+    /**
+     * Pide el segundo tipo del Pokémon, obligando a que sea distinto al primero
+     * o que sea [Tipo.False] si solo tiene un tipo.
+     *
+     * @param tipo1 tipo principal, para no repetirlo.
+     * @return el segundo tipo elegido.
+     */
     private fun solicitarTipo(tipo1: Tipo): Tipo {
         val listaTipos = Tipo.values()
         var tipo2: Tipo? = null
@@ -198,6 +209,12 @@ object Console {
         return tipo2
     }
 
+    /**
+     * Pide el primer tipo del Pokémon por consola. Si la entrada no encaja
+     * con ningún tipo del enum, devuelve [Tipo.False] como señal de error.
+     *
+     * @return el tipo elegido, o [Tipo.False] si no se reconoció.
+     */
     private fun solicitarTipo(): Tipo {
         val listaTipos = Tipo.values()
         println("Introduce el primer tipo del Pokémon en formato 'Acero' :")

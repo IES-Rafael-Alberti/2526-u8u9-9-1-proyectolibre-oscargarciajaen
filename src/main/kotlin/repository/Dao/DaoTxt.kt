@@ -10,6 +10,8 @@ import java.io.File
  */
 class DaoTxt : Dao<Pokemon, String>() {
 
+    private val rutaMongoConfig = "./src/main/kotlin/data/txt/mongo_config.txt"
+
     /**
      * Crea el fichero equipo.txt si no existe.
      * Primero se asegura de que la carpeta exista y luego crea el archivo.
@@ -48,6 +50,28 @@ class DaoTxt : Dao<Pokemon, String>() {
             archivo.writeText(lineas.joinToString("\n"))
         } catch (e: Exception) {
             println("Error al guardar en el archivo: ${e.message}")
+        }
+    }
+
+    /**
+     * Lee la connection string de MongoDB desde el fichero de configuración.
+     * Así evitamos tener las credenciales hardcodeadas en el código.
+     *
+     * @return la connection string o `null` si el fichero no existe o falla la lectura.
+     */
+    fun leerConexionMongo(): String? {
+        val archivo = File(rutaMongoConfig)
+        if (!archivo.exists()) {
+            println("No se encontró el fichero de config de Mongo: $rutaMongoConfig")
+            return null
+        }
+        return try {
+            archivo.readLines()
+                .firstOrNull { it.isNotBlank() }
+                ?.trim()
+        } catch (e: Exception) {
+            println("Error al leer la config de Mongo: ${e.message}")
+            null
         }
     }
 }

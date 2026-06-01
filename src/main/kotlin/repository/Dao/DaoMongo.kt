@@ -27,9 +27,10 @@ class DaoMongo : Dao<Objeto, String>() {
             .append("cantidad", objeto.cantidad)
 
         try {
-            coleccion.insertOne(documento)
+            val resultado = coleccion.insertOne(documento)
         } catch (e: Exception) {
-            println("Error al guardar: ${e.message}")
+            System.err.println("ERROR -> No se pudo insertar ${objeto.nombre}: ${e.message}")
+            e.printStackTrace()
         }
     }
 

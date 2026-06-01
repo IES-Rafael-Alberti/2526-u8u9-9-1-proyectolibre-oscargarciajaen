@@ -6,6 +6,7 @@ import com.mongodb.client.MongoDatabase
 import java.lang.Exception
 import java.util.logging.Level
 import java.util.logging.Logger
+import repository.Dao.DaoTxt
 
 /**
  * Se encarga de abrir y mantener la conexión con MongoDB Atlas.
@@ -17,6 +18,8 @@ class MongoConecctionManager() {
     private var mongoClient: MongoClient? = null
     private var database: MongoDatabase? = null
 
+    private val daoTxt = DaoTxt()
+
     /**
      * Devuelve la base de datos de MongoDB lista para usar.
      * Si no existe conexión previa, la crea y la guarda.
@@ -27,10 +30,11 @@ class MongoConecctionManager() {
 
 
         if (database != null) {
-            return database!!
+            return database
         }
 
-        val connectionString = "mongodb+srv://oscargarciajaen:Edu@proyectou8u9.80xr9yq.mongodb.net/?"
+        val connectionString = daoTxt.leerConexionMongo()
+            ?: return null
 
         try {
             Logger.getLogger("org.mongodb.driver").level = Level.OFF
