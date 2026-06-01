@@ -7,7 +7,6 @@ import repository.RepositorioMongo
 import repository.RepositorioSQL
 import repository.RepositorioTxt
 import util.H2ConnectionManager
-import util.MongoConecctionManager
 
 object PokedexService {
 
