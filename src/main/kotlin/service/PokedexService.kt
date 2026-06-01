@@ -38,7 +38,17 @@ object PokedexService {
                 val cantidad = consola.solicitarCantidad()
                 val objeto = Objeto(nombre, cantidad)
                 repoMongo.save(objeto)
-            } else if (opcion == "9") {
+            } else if (opcion == "6") {
+                val nombre = consola.solicitarNombreObjeto()
+                repoMongo.delete(nombre)
+            } else if (opcion == "7"){
+                val nombre = consola.solicitarNombreObjeto()
+                val cantidad = consola.solicitarCantidad()
+                repoMongo.update(nombre, cantidad)
+            } else if (opcion == "8") {
+                val lista = repoMongo.mostrarObjetos()
+                consola.mostrarTodos(lista)
+            }else if (opcion == "9") {
                 val listaPokemon = repoSql.listarPokemonCapturados()
                 val listaEquipo = mutableListOf<Pokemon>()
 

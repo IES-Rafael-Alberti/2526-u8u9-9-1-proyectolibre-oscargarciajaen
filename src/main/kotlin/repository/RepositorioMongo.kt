@@ -17,15 +17,19 @@ class RepositorioMongo : IRepositoryMongo {
         }
     }
 
-    override fun delete(id: Int) {
-        TODO("Not yet implemented")
+    override fun delete(nombre: String) {
+        val databaseActiva = connectionManager.obtenerMongoDB()
+        daoMongo.eliminarObjeto(databaseActiva, nombre)
     }
 
-    override fun update(entity: Objeto) {
-        TODO("Not yet implemented")
+    override fun update(nombre: String, cantidad: Int) {
+        val databaseActiva = connectionManager.obtenerMongoDB()
+        daoMongo.actualizarCantidad(databaseActiva, nombre, cantidad)
     }
 
     override fun mostrarObjetos(): List<Objeto> {
-        TODO("Not yet implemented")
+        val databaseActiva = connectionManager.obtenerMongoDB()
+        val lista = daoMongo.obtenerTodos(databaseActiva)
+        return lista
     }
 }
