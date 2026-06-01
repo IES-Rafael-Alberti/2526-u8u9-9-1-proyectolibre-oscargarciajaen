@@ -7,11 +7,22 @@ import java.lang.Exception
 import java.util.logging.Level
 import java.util.logging.Logger
 
+/**
+ * Se encarga de abrir y mantener la conexión con MongoDB Atlas.
+ * Funciona como un singleton casero: si ya hay una base de datos
+ * cacheada, la devuelve sin volver a conectar.
+ */
 class MongoConecctionManager() {
 
     private var mongoClient: MongoClient? = null
     private var database: MongoDatabase? = null
 
+    /**
+     * Devuelve la base de datos de MongoDB lista para usar.
+     * Si no existe conexión previa, la crea y la guarda.
+     *
+     * @return la [MongoDatabase] conectada o `null` si algo falla.
+     */
     fun obtenerMongoDB(): MongoDatabase? {
 
 

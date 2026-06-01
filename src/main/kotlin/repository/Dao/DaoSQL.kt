@@ -1,13 +1,23 @@
 package repository.Dao
 
 import model.Pokemon
-import org.example.Modelo.Tipo
+import model.Tipo
 import java.sql.Connection
 import java.sql.SQLException
 import kotlin.use
 
-class DaoSQL {
+/**
+ * DAO que hace las queries SQL contra la base de datos H2.
+ * Aquí está todo el CRUD de Pokémon a base de prepared statements.
+ */
+class DaoSQL : Dao<Pokemon, Int>() {
 
+    /**
+     * Inserta un Pokémon en la tabla de Registrados (los que solo has visto).
+     *
+     * @param conexion conexión H2.
+     * @param entity Pokémon a guardar.
+     */
     fun saveAvistado(conexion: Connection?, entity: Pokemon) {
         val sql = "INSERT INTO REGISTRADOS (nombre, tipo1, tipo2) VALUES (?, ?, ?)"
 

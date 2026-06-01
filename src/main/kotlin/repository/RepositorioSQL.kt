@@ -4,6 +4,12 @@ import model.Pokemon
 import repository.Dao.DaoSQL
 import java.sql.Connection
 
+/**
+ * Repositorio que trabaja contra la base de datos H2.
+ * Básicamente hace de intermediario entre el servicio y el [DaoSQL].
+ *
+ * @param conexion conexión H2 ya abierta.
+ */
 class RepositorioSQL(conexion: Connection?) : IRepositorySQL {
 
     val dao = DaoSQL()

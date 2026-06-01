@@ -4,8 +4,18 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 
+/**
+ * Gestiona la conexión con la base de datos H2 en modo fichero.
+ * Aquí se crea la conexión y se asegura de que existan las tablas
+ * que usa la app.
+ */
 class H2ConnectionManager() {
 
+    /**
+     * Abre una conexión contra la base de datos H2 local.
+     *
+     * @return la [Connection] si todo va bien, o `null` si peta.
+     */
     fun create(): Connection? {
         val url = "jdbc:h2:file:./src/main/kotlin/data/bd/pokemon"
         val username = "sa"
@@ -20,6 +30,11 @@ class H2ConnectionManager() {
         }
     }
 
+    /**
+     * Crea las tablas `Capturados` y `Registrados` si todavía no existen.
+     *
+     * @param conexion conexión H2 sobre la que se ejecutan los CREATE.
+     */
     fun createTables(conexion: Connection?) {
 
         if (conexion != null) {

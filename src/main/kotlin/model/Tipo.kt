@@ -1,5 +1,9 @@
-package org.example.Modelo
+package model
 
+/**
+ * Tipos de Pokémon que maneja la app.
+ * El `False` se usa como comodín para cuando un Pokémon solo tiene un tipo.
+ */
 enum class Tipo{
     Acero,
     Agua,

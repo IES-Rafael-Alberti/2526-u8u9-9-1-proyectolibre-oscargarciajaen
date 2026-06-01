@@ -1,7 +1,15 @@
 package model
 
-import org.example.Modelo.Tipo
-
+/**
+ * Modelo principal de un Pokémon en la app.
+ * Puede tener uno o dos tipos, y el id es opcional porque
+ * los recién registrados todavía no lo tienen.
+ *
+ * @property nombre nombre del Pokémon.
+ * @property tipo1 tipo principal.
+ * @property tipo2 tipo secundario (o [Tipo.False] si solo tiene uno).
+ * @property id identificador en BD, opcional hasta que se persiste.
+ */
 data class Pokemon(
     val nombre: String,
     val tipo1: Tipo,

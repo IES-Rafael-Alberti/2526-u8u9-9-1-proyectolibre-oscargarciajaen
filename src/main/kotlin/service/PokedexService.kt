@@ -3,13 +3,23 @@ package org.example.Service
 import model.Objeto
 import model.Pokemon
 import org.iesra.app.Console
+import repository.Dao.DaoCsv
 import repository.RepositorioMongo
 import repository.RepositorioSQL
 import repository.RepositorioTxt
 import util.H2ConnectionManager
 
+/**
+ * Servicio principal de la Pokédex. Aquí se monta todo el flujo:
+ * conexión con H2, conexión con Mongo y el menú que ve el usuario.
+ * Es un `object` porque solo necesitamos una instancia viva.
+ */
 object PokedexService {
 
+    /**
+     * Arranca la app: prepara H2, los repositorios y muestra el menú
+     * en bucle hasta que el usuario pulse 'X'.
+     */
     fun ejecutar(){
         val h2 = H2ConnectionManager()
         val conexion = h2.create()
@@ -86,10 +96,21 @@ object PokedexService {
     }
 
     private fun ingresarObjeto(consola:Console, repoMongo: RepositorioMongo){
-        val nombre = consola.solicitarNombreObjeto()
-        val cantidad = consola.solicitarCantidad()
-        val objeto = Objeto(nombre, cantidad)
-        repoMongo.save(objeto)
+        val origen = consola.solicitarOrigenObjeto()
+        when (origen) {
+            "1" -> {
+                val nombre = consola.solicitarNombreObjeto()
+                val cantidad = consola.solicitarCantidad()
+                val objeto = Objeto(nombre, cantidad)
+                repoMongo.save(objeto)
+            }
+            "2" -> {
+                val daoCsv = DaoCsv()
+                val objetos = daoCsv.leerObjetos()
+                objetos.forEach { repoMongo.save(it) }
+                println("Se han cargado ${objetos.size} objetos desde el CSV.")
+            }
+        }
     }
 
     private fun actualizarObjeto(consola: Console, repoMongo: RepositorioMongo){

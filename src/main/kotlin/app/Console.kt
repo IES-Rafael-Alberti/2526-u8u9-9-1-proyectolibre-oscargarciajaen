@@ -1,10 +1,18 @@
 package org.iesra.app
 
-import model.Pokemon
-import org.example.Modelo.Tipo
+import model.Tipo
 
+/**
+ * Centraliza toda la interacción con el usuario por consola.
+ * Validaciones, menús, lecturas de teclado... todo pasa por aquí.
+ */
 object Console {
 
+    /**
+     * Pide una opción del menú principal y se asegura de que sea válida.
+     *
+     * @return la opción elegida como String.
+     */
     fun solicitarOpcion(): String{
 
         val opciones = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "X", "x")
@@ -64,13 +72,16 @@ object Console {
     }
 
     fun solicitarId(): Int {
+        val regexId = Regex("^\\d+$")
         var id: Int? = null
 
         do {
             println("Introduce el ID del Pokémon que quieres eliminar")
             val entrada = readLine()?.trim()
-            if (entrada != null && entrada.all { it.isDigit() }) {
+            if (entrada != null && regexId.matches(entrada)) {
                 id = entrada.toInt()
+            } else {
+                println("ID no válido. Debe ser un número entero positivo.\n")
             }
         } while (id == null)
         return id
@@ -113,18 +124,40 @@ object Console {
     }
 
     fun solicitarCantidad(): Int {
+        val regexCantidad = Regex("^([1-9]|[1-9][0-9])")
         var cantidad: Int? = null
         do {
             println("Introduce la cantidad del objeto: ")
             val entrada = readLine()?.trim()
-            if (entrada != null && entrada.all { it.isDigit() }) {
-                val entradaInt = entrada.toInt()
-                if (entradaInt > 0 && entradaInt < 100) {
-                    cantidad = entradaInt
-                }
+            if (entrada != null && regexCantidad.matches(entrada)) {
+                cantidad = entrada.toInt()
+            } else {
+                println("Cantidad no válida. Debe ser un número entre 1 y 99.\n")
             }
         } while (cantidad == null)
         return cantidad
+    }
+
+    /**
+     * Pregunta al usuario de dónde quiere sacar el objeto a registrar.
+     *
+     * @return "1" para terminal, "2" para CSV.
+     */
+    fun solicitarOrigenObjeto(): String {
+        var opcion: String? = null
+        do {
+            println("¿Cómo quieres registrar el objeto?")
+            println("1. Por terminal")
+            println("2. Desde CSV")
+            print("Introduzca su opción -> ")
+            val entrada = readLine()
+            if (entrada == "1" || entrada == "2") {
+                opcion = entrada
+            } else {
+                println("Opción no válida.\n")
+            }
+        } while (opcion == null)
+        return opcion
     }
 
     private fun mostrarMenu(){

@@ -4,6 +4,11 @@ import model.Objeto
 import repository.Dao.DaoMongo
 import util.MongoConecctionManager
 
+/**
+ * Repositorio que trabaja contra MongoDB.
+ * Crea su propia conexión con ayuda de [MongoConecctionManager]
+ * y delega en el [DaoMongo] para tocar la base de datos.
+ */
 class RepositorioMongo : IRepositoryMongo {
 
     private val connectionManager = MongoConecctionManager()

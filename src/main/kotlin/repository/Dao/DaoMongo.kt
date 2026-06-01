@@ -7,8 +7,18 @@ import com.mongodb.client.model.Updates
 import model.Objeto
 import org.bson.Document
 
-class DaoMongo {
+/**
+ * DAO que habla con MongoDB. Aquí se hacen las operaciones CRUD
+ * de los objetos del inventario (insertar, borrar, actualizar, listar).
+ */
+class DaoMongo : Dao<Objeto, String>() {
 
+    /**
+     * Inserta un objeto en la colección "Objetos".
+     *
+     * @param database base de datos MongoDB activa.
+     * @param objeto objeto a guardar.
+     */
     fun guardarObjeto(database: MongoDatabase, objeto: Objeto) {
         val coleccion: MongoCollection<Document> = database.getCollection("Objetos")
 
