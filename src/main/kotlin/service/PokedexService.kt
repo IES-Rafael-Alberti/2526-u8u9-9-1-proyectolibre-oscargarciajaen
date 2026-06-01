@@ -14,8 +14,6 @@ object PokedexService {
     fun ejecutar(){
         val h2 = H2ConnectionManager()
         val conexion = h2.create()
-        val mongo = MongoConecctionManager()
-        val conextionMongo = mongo.obtenerMongoDB()
         h2.createTables(conexion)
         val repoSql = RepositorioSQL(conexion)
         val repoMongo = RepositorioMongo()
@@ -24,57 +22,16 @@ object PokedexService {
 
         do {
             opcion = consola.solicitarOpcion()
-            if (opcion == "1") {
-                registrar(consola, repoSql)
-            } else if (opcion == "2") {
-                actualizarPokemon(consola, repoSql)
-            } else if (opcion == "3") {
-                val id = consola.solicitarId()
-                repoSql.delete(id)
-            }else if (opcion == "4"){
-                obtenerLista(consola, repoSql)
-            } else if (opcion == "5") {
-                val nombre = consola.solicitarNombreObjeto()
-                val cantidad = consola.solicitarCantidad()
-                val objeto = Objeto(nombre, cantidad)
-                repoMongo.save(objeto)
-            } else if (opcion == "6") {
-                val nombre = consola.solicitarNombreObjeto()
-                repoMongo.delete(nombre)
-            } else if (opcion == "7"){
-                val nombre = consola.solicitarNombreObjeto()
-                val cantidad = consola.solicitarCantidad()
-                repoMongo.update(nombre, cantidad)
-            } else if (opcion == "8") {
-                val lista = repoMongo.mostrarObjetos()
-                consola.mostrarTodos(lista)
-            }else if (opcion == "9") {
-                val listaPokemon = repoSql.listarPokemonCapturados()
-                val listaEquipo = mutableListOf<Pokemon>()
-
-                if (listaPokemon.size <= 6) {
-                    listaPokemon.forEach {
-                        listaEquipo.add(it)
-                    }
-                } else {
-                    val indicesAleatorios = mutableListOf<Int>()
-
-                    while (indicesAleatorios.size < 6) {
-                        val numeroAzar = (0 until listaPokemon.size).random()
-
-                        if (numeroAzar !in indicesAleatorios) {
-                            indicesAleatorios.add(numeroAzar)
-                        }
-                    }
-
-                    indicesAleatorios.forEach { it ->
-                        val pokemonAleatorio = listaPokemon[it]
-                        listaEquipo.add(pokemonAleatorio)
-                    }
-                }
-                val repoTxt = RepositorioTxt()
-                repoTxt.crear()
-                repoTxt.guardar(listaEquipo)
+            when (opcion) {
+                "1" -> { registrar(consola, repoSql) }
+                "2" -> { actualizarPokemon(consola, repoSql) }
+                "3" -> { eliminar(consola, repoSql) }
+                "4" -> { obtenerLista(consola, repoSql) }
+                "5" -> { ingresarObjeto(consola, repoMongo) }
+                "6" -> { eliminarObjeto(consola, repoMongo) }
+                "7" -> { actualizarObjeto(consola, repoMongo) }
+                "8" -> { listarObjetos(consola, repoMongo) }
+                "9" -> { crearEquipo(repoSql) }
             }
         } while (opcion != "x" && opcion != "X")
     }
@@ -98,6 +55,11 @@ object PokedexService {
         }
     }
 
+    private fun eliminar(consola: Console, repoSql: RepositorioSQL){
+        val id = consola.solicitarId()
+        repoSql.delete(id)
+    }
+
     private fun actualizarPokemon(consola: Console, repoSql: RepositorioSQL){
         val nombre = consola.solicitarNombrePokemon()
         val tipos = consola.obtenerTipos()
@@ -117,5 +79,57 @@ object PokedexService {
                 consola.mostrarTodos(listaPokemon)
             }
         }
+    }
+
+    private fun eliminarObjeto(consola: Console, repoMongo: RepositorioMongo){
+        val nombre = consola.solicitarNombreObjeto()
+        repoMongo.delete(nombre)
+    }
+
+    private fun ingresarObjeto(consola:Console, repoMongo: RepositorioMongo){
+        val nombre = consola.solicitarNombreObjeto()
+        val cantidad = consola.solicitarCantidad()
+        val objeto = Objeto(nombre, cantidad)
+        repoMongo.save(objeto)
+    }
+
+    private fun actualizarObjeto(consola: Console, repoMongo: RepositorioMongo){
+        val nombre = consola.solicitarNombreObjeto()
+        val cantidad = consola.solicitarCantidad()
+        repoMongo.update(nombre, cantidad)
+    }
+
+    private fun listarObjetos(consola: Console, repoMongo: RepositorioMongo){
+        val lista = repoMongo.mostrarObjetos()
+        consola.mostrarTodos(lista)
+    }
+
+    private fun crearEquipo(repoSql: RepositorioSQL){
+        val listaPokemon = repoSql.listarPokemonCapturados()
+        val listaEquipo = mutableListOf<Pokemon>()
+
+        if (listaPokemon.size <= 6) {
+            listaPokemon.forEach {
+                listaEquipo.add(it)
+            }
+        } else {
+            val indicesAleatorios = mutableListOf<Int>()
+
+            while (indicesAleatorios.size < 6) {
+                val numeroAzar = (0 until listaPokemon.size).random()
+
+                if (numeroAzar !in indicesAleatorios) {
+                    indicesAleatorios.add(numeroAzar)
+                }
+            }
+
+            indicesAleatorios.forEach { it ->
+                val pokemonAleatorio = listaPokemon[it]
+                listaEquipo.add(pokemonAleatorio)
+            }
+        }
+        val repoTxt = RepositorioTxt()
+        repoTxt.crear()
+        repoTxt.guardar(listaEquipo)
     }
 }
