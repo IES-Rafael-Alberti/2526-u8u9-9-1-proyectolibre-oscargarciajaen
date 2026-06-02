@@ -1,18 +1,22 @@
 # Solución del proyecto
 
-- **Proyecto:** <!-- Nombre del proyecto --> Gestión de Equipo Pokémon
+- **Proyecto:** <!-- Nombre del proyecto --> Gestion de Pokemon y Objetos
 - **Alumno/a:** <!-- Nombre y apellidos --> Óscar García Jaén
 - **Repositorio:** <!-- URL del repositorio --> https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen
 
 ## 1. Resumen del proyecto
 
-- **Problema que resuelve:** <!-- Explicación breve --> Te permite mantener un control de los Pokemon capturados y puedes desarrollar el equipo a partir de ellos.
+- **Problema que resuelve:** <!-- Explicación breve --> Te permite mantener un control de los Pokemon capturados, avistados y objetos adquiridos, ademas de la creacion de generar equipos aleatorios a partir de los Pokemon captruados.
 - **Usuarios principales:** <!-- A quién va dirigido --> Principalmente este programa va dirigidos a los jugadores de la franquicia Pokémon.
 - **Funcionalidades principales:** <!-- Lista breve --> 
   - Registrar Pokémon
   - Actualizar Pokémon
   - Eliminar Pokémon
   - Listar Pokémon
+  - Registrar Objeto
+  - Actualizar Cantidad de Objeto
+  - Listar objetos
+  - Eliminar Objetos
   - Crear Equipo
 - **Entidades principales:** <!-- Clases o conceptos del dominio -->
 - **Estructura del proyecto:** <!-- Paquetes principales y responsabilidad -->
@@ -31,7 +35,7 @@
 ## 3. Diseño y modelo
 
 - **Clases principales:** <!-- Clase -> responsabilidad -->
-- **Relaciones importantes:** <!-- Herencia, interfaces, composición -->
+- **Relaciones importantes:** Herencia entre la clase abstracta Dao y las subclases que son dao específicos y las interfaces de los respositorios.
 - **Genéricos usados:** <!-- Clase/interfaz/función y motivo -->
 - **Colecciones usadas:** <!-- Tipo, uso y justificación -->
 - **Principios SOLID aplicados:** <!-- Al menos dos, con enlace al código -->
@@ -41,30 +45,37 @@
 
 ### Ficheros
 
-- **Ficheros usados:** <!-- Nombre y ruta -->
-- **Formato y contenido:** <!-- CSV, JSON, TXT... -->
-- **Lectura/escritura:** <!-- Qué operaciones realiza -->
-- **Clase responsable:** <!-- Enlace al código -->
-- **Errores controlados:** <!-- Qué ocurre si falla -->
+- **Ficheros usados:** Nombre: objetos.csv ruta: ./src/main/kotlin/data/csv/objetos.csv, Nombre: equipo.txt ruta: ./src/main/kotlin/data/txt/equipo.txt y Nombre: mongo_config.txt ruta: ./src/main/kotlin/data/txt/mongo_config.txt
+- **Formato y contenido:** El fichero csv llamado objetos.csv contiene objetos para insertarlos en la base de datos, tienen el formato "nombreObjeto|CantidadObjeto", el txt llamado equipo.txt contiene el equipo generado aleatoriamente y está escrito en el formato del toString de la clase Pokemon y el txt llamado mongo_config contiene el enlace para conectarse con la base de datos de mongo.
+- **Lectura/escritura:** Las operaciones de lectura que realizo son, leer objetos para ingresarlos en la base de datos y lectura de la información necesaria para conectar con mongo.
+- **Clase responsable:** Para la primera lectura, la de los objetos uso la clase DaoCsv y para la lectura del txt uso DaoTxt.
+- **Errores controlados:** 
 
 ### MongoDB
 
-- **Base de datos:** <!-- Nombre -->
-- **Colecciones:** <!-- Nombre y uso -->
+- **Base de datos:** proyecto
+- **Colecciones:** Objetos, se utiliza para contener los objetos y la cantidad de cada uno.
 - **Documento de ejemplo:**
 
 ```json
 {
-  "campo": "valor"
+  _id:1,
+  nombre:1,
+  cantidad:1
 }
 ```
 
-- **Operaciones realizadas:** <!-- Insertar, consultar, modificar, borrar -->
-- **Clase responsable:** <!-- Enlace al código -->
+- **Operaciones realizadas:** 
+- Insertar:
+- Eliminar:
+- Actualizar:
+- Listar
+- **Clase responsable:** 
+- DaoMongo:
 
 ### Base de datos relacional
 
-- **SGBD utilizado:** <!-- H2, SQLite, MySQL... -->
+- **SGBD utilizado:** He usado la base de datos H2.
 - **Script SQL:** <!-- Ruta del script -->
 - **Tablas y relaciones:** <!-- Resumen -->
 - **Operaciones CRUD:** <!-- Qué entidades cubren -->
@@ -75,7 +86,6 @@
 
 - **Expresiones regulares:** <!-- Dato, regex, ejemplo válido/no válido, enlace -->
 - **Excepciones controladas:** <!-- Tipo de error y respuesta del programa -->
-- **Excepciones propias:** <!-- Si existen, indicar clase y motivo -->
 
 ## 6. Pruebas y evidencias
 
@@ -95,9 +105,9 @@
 
 ## 8. Problemas encontrados y soluciones
 
-| Problema | Solución aplicada | Enlace o evidencia |
-|----------|-------------------|--------------------|
-| <!-- Problema --> | <!-- Solución --> | <!-- Enlace --> |
+| Problema                                 | Solución aplicada                              | Enlace o evidencia |
+|------------------------------------------|------------------------------------------------|--------------------|
+| Tenia los datos para acceder a la Mongo. | Introducirlos en un txt desde el cual se leen. | X                  |
 
 ## 9. Respuestas a los criterios de evaluación
 
