@@ -47,6 +47,3 @@ bin/
 .idea
 .atl
 
-### Credenciales ###
-src/main/kotlin/data/txt/mongo_config.txt
-src/main/kotlin/data/bd/

@@ -9,21 +9,21 @@
 - **Problema que resuelve:** Te permite mantener un control de los Pokemon capturados, avistados y objetos adquiridos, ademas de la creacion de generar equipos aleatorios a partir de los Pokemon captruados.
 - **Usuarios principales:** Principalmente, este programa va dirigidos a los jugadores de la franquicia Pokémon.
 - **Funcionalidades principales:**
-  - Registrar Pokémon
-  - Actualizar Pokémon
-  - Eliminar Pokémon
-  - Listar Pokémon
-  - Registrar Objeto
-  - Actualizar Cantidad de Objeto
-  - Listar objetos
-  - Eliminar Objetos
-  - Crear Equipo
+  - Registrar Pokémon : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoSQL.kt#L15-L63
+  - Actualizar Pokémon : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoSQL.kt#L174-L226
+  - Eliminar Pokémon : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoSQL.kt#L65-L86
+  - Listar Pokémon : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoSQL.kt#L88-L170
+  - Registrar Objeto : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoMongo.kt#L16-L35
+  - Actualizar Cantidad de Objeto : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoMongo.kt#L55-L74
+  - Listar objetos : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoMongo.kt#L76-L92
+  - Eliminar Objetos : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoMongo.kt#L37-L53
+  - Crear Equipo : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/service/PokedexService.kt#L180-L215
 - **Entidades principales:** 
-  - Pokemon (data class) - representa un Pokémon con nombre, tipo1, tipo2 e id opcional.
-  - Objeto (data class) - representa un objeto con nombre y cantidad.
-  - Tipo (enum) - enum con los 18 tipos de Pokémon + False para los Pokémon con 1 solo tipo.
+  - Pokemon (data class) - representa un Pokémon con nombre, tipo1, tipo2 e id opcional : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/model/Pokemon.kt#L3-L29
+  - Objeto (data class) - representa un objeto con nombre y cantidad : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/model/Objeto.kt#L3-L14
+  - Tipo (enum) - enum con los 18 tipos de Pokémon + False para los Pokémon con 1 solo tipo : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/model/Tipo.kt#L3-L27
 - **Estructura del proyecto:** 
-  - model/ - clases del dominio (Pokemon, objeto, tipo) 
+  - model/ - clases del dominio (Pokemon, objeto, tipo)
   - respository/Dao/ - capa de acceso a datos con genéricos (Dao<T, ID> abstracto, DaoSQL, DaoMongo, DaoCsv, DaoTxt)
   - repository/ - interfaces de repositorio (IRepositorySQL), IRepositoryMongo, IRepositoryTxt) y sus implementaciones (RepositorioSQL, RepositorioMongo, RepositorioTxt)
   - service/ - logica de negocio (PokedexService)
@@ -44,27 +44,34 @@
 ## 3. Diseño y modelo
 
 - **clases principales:**
-  - `Pokemon` (`model/Pokemon.kt`) – data class con nombre, tipo1, tipo2, id opcional
-  - `Objeto` (`model/Objeto.kt`) – data class con nombre y cantidad
-  - `Tipo` (`model/Tipo.kt`) – enum con 19 valores (Acero, Agua, ..., False)
-  - `Console` (`app/Console.kt`) – object singleton que maneja toda la interacción por consola: menús, lectura y validación de entrada
-  - `PokedexService` (`service/PokedexService.kt`) – object singleton que orquesta toda la lógica de la aplicación
-  - `Dao<T, ID>` (`repository/Dao/Dao.kt`) – clase abstracta genérica base para todos los DAOs
-  - `DaoSQL` (`repository/Dao/DaoSQL.kt`) – CRUD para H2 con PreparedStatement
-  - `DaoMongo` (`repository/Dao/DaoMongo.kt`) – CRUD para MongoDB con `insertOne`, `deleteOne`, `updateOne`, `find`
-  - `DaoCsv` (`repository/Dao/DaoCsv.kt`) – lectura de `objetos.csv`
-  - `DaoTxt` (`repository/Dao/DaoTxt.kt`) – lectura/escritura de `equipo.txt` y `mongo_config.txt`
-  - `H2ConnectionManager` (`util/H2ConnectionManager.kt`) – conexión H2 y creación de tablas
-  - `MongoConecctionManager` (`util/MongoConecctionManager.kt`) – conexión a MongoDB Atlas
+  - `Pokemon` (`model/Pokemon.kt`) – data class con nombre, tipo1, tipo2, id opcional : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/model/Pokemon.kt#L3-L29
+  - `Objeto` (`model/Objeto.kt`) – data class con nombre y cantidad : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/model/Objeto.kt#L3-L14
+  - `Tipo` (`model/Tipo.kt`) – enum con 19 valores (Acero, Agua, ..., False): https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/model/Tipo.kt#L3-L27
+  - `Console` (`app/Console.kt`) – object singleton que maneja toda la interacción por consola: menús, lectura y validación de entrada : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/app/Console.kt#L3-L272
+  - `PokedexService` (`service/PokedexService.kt`) – object singleton que orquesta toda la lógica de la aplicación : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/service/PokedexService.kt#L3-L216
+  - `Dao<T, ID>` (`repository/Dao/Dao.kt`) – clase abstracta genérica base para todos los DAOs : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/Dao.kt#L3-L16
+  - `DaoSQL` (`repository/Dao/DaoSQL.kt`) – CRUD para H2 con PreparedStatement : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoSQL.kt#L3-L227
+  - `DaoMongo` (`repository/Dao/DaoMongo.kt`) – CRUD para MongoDB con `insertOne`, `deleteOne`, `updateOne`, `find` : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoMongo.kt#L3-L93
+  - `DaoCsv` (`repository/Dao/DaoCsv.kt`) – lectura de `objetos.csv` : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoCsv.kt#L3-L44
+  - `DaoTxt` (`repository/Dao/DaoTxt.kt`) – lectura/escritura de `equipo.txt` y `mongo_config.txt` : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoTxt.kt#L3-L77
+  - `H2ConnectionManager` (`util/H2ConnectionManager.kt`) – conexión H2 y creación de tablas : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/util/H2ConnectionManager.kt#L3-L64
+  - `MongoConecctionManager` (`util/MongoConecctionManager.kt`) – conexión a MongoDB Atlas : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/util/MongoConecctionManager.kt#L3-L52
 - **Relaciones importantes:** Herencia de `Dao<T, ID>` hacia `DaoSQL`, `DaoMongo`, `DaoCsv`, `DaoTxt`. Interfaces `IRepositorySQL`, `IRepositoryMongo`, `IRepositoryTxt` implementadas por `RepositorioSQL`, `RepositorioMongo`, `RepositorioTxt` respectivamente.
 
 - **Genéricos usados:** `Dao<T, ID>` como clase abstracta genérica donde `T` es la entidad e `ID` el tipo de identificador. `Console.mostrarTodos<T>(lista: List<T>)` como función genérica.
 
 - **Colecciones usadas:**
   - `MutableList<Pokemon>` en `DaoSQL.listarPokemonRegistrados()` y `listarPokemonCapturados()` para resultados de consultas SQL
+    - https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoSQL.kt#L96
+    - https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoSQL.kt#L138
   - `MutableList<Objeto>` en `DaoCsv.leerObjetos()` y `DaoMongo.obtenerTodos()` para acumular resultados
+    - https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoMongo.kt#L83
+    - https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoCsv.kt#L20
   - `MutableList<Pokemon>` y `MutableList<Int>` en `PokedexService.crearEquipo()` para generar equipo aleatorio
+    - https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/service/PokedexService.kt#L190
+    - https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/service/PokedexService.kt#L197
   - `List<String>` en `Console.solicitarOpcion()` para opciones válidas del menú
+    - https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/app/Console.kt#L18
 
 - **Principios SOLID aplicados:**
   - **SRP:** `Console` solo gestiona I/O de usuario, `DaoSQL` solo operaciones SQL, `H2ConnectionManager` solo conexión/creación de tablas
@@ -81,17 +88,29 @@
 ### Ficheros
 
 - **Ficheros usados:**
-  - `objetos.csv` (`src/main/kotlin/data/csv/objetos.csv`) – leído por `DaoCsv.leerObjetos()` usando `useLines`
+  - `objetos.csv` (`src/main/kotlin/data/csv/objetos.csv`) – leído por `DaoCsv.leerObjetos()` usando `useLines` 
+    - objetos.csv : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/main/src/main/kotlin/data/csv/objetos.csv
+    - DaoCsv : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoCsv.kt#L12-L43
   - `equipo.txt` (`src/main/kotlin/data/txt/equipo.txt`) – creado por `DaoTxt.crear()`, escrito por `DaoTxt.guardar()` usando `writeText`
+    - equipo.txt : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/main/src/main/kotlin/data/txt/equipo.txt
+    - DaoTxt : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/repository/Dao/DaoTxt.kt#L15-L54
   - `mongo_config.txt` (`src/main/kotlin/data/txt/mongo_config.txt`) – leído por `DaoTxt.leerConexionMongo()` usando `readLines()`
+    - mongo_config.txt : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/main/src/main/kotlin/data/txt/mongo_config.txt
+    - DaoTxt : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/repository/Dao/DaoTxt.kt#L56-L77
 - **Errores controlados:** `DaoCsv` captura `Exception` genérica, `DaoTxt` captura `Exception` genérica
-
+  - DaoCsv : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/repository/Dao/DaoCsv.kt#L27-L40
+  - DaoTxt : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/repository/Dao/DaoTxt.kt#L45-L53
+  
 ### MongoDB
 
 - **Base de datos:** proyecto
 - **Colecciones:** Objetos – documentos con `nombre` (String) y `cantidad` (Int)
 - **Operaciones:** `DaoMongo.guardarObjeto()`, `DaoMongo.eliminarObjeto()`, `DaoMongo.actualizarCantidad()`, `DaoMongo.obtenerTodos()`
+  - DaoMongo : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/repository/Dao/DaoMongo.kt#L10-L93
 - **Clase responsable:** `DaoMongo` + `RepositorioMongo` delega en él; `MongoConecctionManager.obtenerMongoDB()` gestiona la conexión
+  - DaoMongo : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/repository/Dao/DaoMongo.kt#L10-L93
+  - RepositorioMongo : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/repository/RepositorioMongo.kt#L7-L53
+  - MongoConnectionManager : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/util/MongoConecctionManager.kt#L11-L52
 
 ### Base de datos relacional (H2)
 
@@ -100,18 +119,25 @@
   - `CAPTURADOS` (id INT AUTO_INCREMENT PK, nombre VARCHAR, tipo1 VARCHAR, tipo2 VARCHAR)
   - `REGISTRADOS` (nombre VARCHAR PK, tipo1 VARCHAR, tipo2 VARCHAR)
 - **Script SQL:** En `H2ConnectionManager.createTables()` con `CREATE TABLE IF NOT EXISTS`
-- **CRUD completo en DaoSQL:** `saveAvistado()`/`saveCaptura()` (Create), `listarPokemonRegistrados()`/`listarPokemonCapturados()` (Read), `update()`/`updateRegistrados()` (Update), `liberarPokemonCapturado()` (Delete)
+  - https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/util/H2ConnectionManager.kt#L38-L63
+- **CRUD completo en DaoSQL:** `saveAvistado()`/`saveCaptura()`, `listarPokemonRegistrados()`/`listarPokemonCapturados()`, `update()`/`updateRegistrados()`, `liberarPokemonCapturado()`
+  - DaoSql : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/repository/Dao/DaoSQL.kt#L9-L227
 - **Consultas parametrizadas:** Todos los SQL usan `PreparedStatement` con `?` (ej. `INSERT INTO CAPTURADOS (nombre, tipo1, tipo2) VALUES (?, ?, ?)`)
+  - Ejemplo función con consulta parametrizada : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/repository/Dao/DaoSQL.kt#L21-L38
 - **Gestión de conexión:** `H2ConnectionManager.create()` abre la conexión, se pasa como parámetro a los métodos de `DaoSQL`, y se cierra al finalizar `PokedexService.ejecutar()`. Los `PreparedStatement` se cierran automáticamente con `.use {}`.
+  - H2ConnectionManager : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/util/H2ConnectionManager.kt#L14-L31
+  - PokedexService : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/service/PokedexService.kt#L19-L46
 
 ## 5. Validaciones y errores
 
 - **Expresiones regulares:**
   - `^\d+$` en `Console.solicitarId()` – valida que el ID sea un número positivo. Válido: `"42"`, Inválido: `"-1"`, `"abc"`
+  - solicitarId() : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/app/Console.kt#L90-L109
   - `^([1-9]|[1-9][0-9])$` en `Console.solicitarCantidad()` – valida cantidad entre 1 y 99. Válido: `"15"`, Inválido: `"0"`, `"100"`
+  - solicitarCantidad() : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/7d842056bb0d2dcc54e9abbfca3a728a520eeee7/src/main/kotlin/app/Console.kt#L164-L182
 
 - **Excepciones controladas:**
-  - `SQLException` en `DaoSQL` – capturada en cada método, imprime mensaje de error y continúa
+  - `SQLException` en `DaoSQL` – capturada en cada método, imprime mensaje de error y continúa 
   - `Exception` en `DaoCsv.leerObjetos()` – si falla la lectura del CSV, devuelve lista vacía
   - `Exception` en `DaoTxt` – si falla la operación con ficheros, imprime error
   - `Exception` en `DaoMongo` – capturada en cada operación e imprime error.
