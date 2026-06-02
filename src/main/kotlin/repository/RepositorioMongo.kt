@@ -14,6 +14,9 @@ class RepositorioMongo : IRepositoryMongo {
     private val connectionManager = MongoConecctionManager()
     private val daoMongo: DaoMongo = DaoMongo()
 
+    /**
+     * Guarda un objeto en MongoDB.
+     */
     override fun save(entity: Objeto) {
         val databaseActiva = connectionManager.obtenerMongoDB()
         if (databaseActiva == null) {
@@ -23,16 +26,25 @@ class RepositorioMongo : IRepositoryMongo {
         daoMongo.guardarObjeto(databaseActiva, entity)
     }
 
+    /**
+     * Elimina un objeto de MongoDB por su nombre.
+     */
     override fun delete(nombre: String) {
         val databaseActiva = connectionManager.obtenerMongoDB()
         daoMongo.eliminarObjeto(databaseActiva, nombre)
     }
 
+    /**
+     * Actualiza la cantidad de un objeto en MongoDB.
+     */
     override fun update(nombre: String, cantidad: Int) {
         val databaseActiva = connectionManager.obtenerMongoDB()
         daoMongo.actualizarCantidad(databaseActiva, nombre, cantidad)
     }
 
+    /**
+     * Obtiene todos los objetos del inventario desde MongoDB.
+     */
     override fun mostrarObjetos(): List<Objeto> {
         val databaseActiva = connectionManager.obtenerMongoDB()
         val lista = daoMongo.obtenerTodos(databaseActiva)

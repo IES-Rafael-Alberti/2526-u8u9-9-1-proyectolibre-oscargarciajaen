@@ -37,6 +37,12 @@ class DaoSQL : Dao<Pokemon, Int>() {
         }
     }
 
+    /**
+     * Inserta un Pokémon en la tabla de Capturados (los que has atrapado).
+     *
+     * @param conexion conexión H2.
+     * @param entity Pokémon a guardar.
+     */
     fun saveCaptura(conexion: Connection?, entity: Pokemon) {
         val sql = "INSERT INTO CAPTURADOS (nombre, tipo1, tipo2) VALUES (?, ?, ?)"
 
@@ -56,6 +62,12 @@ class DaoSQL : Dao<Pokemon, Int>() {
         }
     }
 
+    /**
+     * Elimina un Pokémon capturado por su ID.
+     *
+     * @param conexion conexión H2.
+     * @param id identificador del Pokémon a eliminar.
+     */
     fun liberarPokemonCapturado(conexion: Connection?, id: Int) {
         val sql = "DELETE FROM CAPTURADOS WHERE ID = ?"
 
@@ -73,6 +85,12 @@ class DaoSQL : Dao<Pokemon, Int>() {
         }
     }
 
+    /**
+     * Obtiene todos los Pokémon registrados (avistados) desde H2.
+     *
+     * @param conexion conexión H2.
+     * @return lista de Pokémon registrados.
+     */
     fun listarPokemonRegistrados(conexion: Connection?): List<Pokemon>{
 
         var listaPokemon = mutableListOf<Pokemon>()
@@ -109,6 +127,12 @@ class DaoSQL : Dao<Pokemon, Int>() {
         return listaPokemon
     }
 
+    /**
+     * Obtiene todos los Pokémon capturados desde H2.
+     *
+     * @param conexion conexión H2.
+     * @return lista de Pokémon capturados.
+     */
     fun listarPokemonCapturados(conexion: Connection?): List<Pokemon>{
 
         var listaPokemon = mutableListOf<Pokemon>()
@@ -147,6 +171,12 @@ class DaoSQL : Dao<Pokemon, Int>() {
 
 
 
+    /**
+     * Actualiza los tipos de un Pokémon capturado por su nombre.
+     *
+     * @param conexion conexión H2.
+     * @param entity Pokémon con los nuevos datos.
+     */
     fun update(conexion: Connection?, entity: Pokemon){
         val sql = "UPDATE CAPTURADOS SET tipo1 = ?, tipo2 = ? WHERE nombre = ?"
 
@@ -168,6 +198,12 @@ class DaoSQL : Dao<Pokemon, Int>() {
         }
     }
 
+    /**
+     * Actualiza los tipos de un Pokémon registrado por su nombre.
+     *
+     * @param conexion conexión H2.
+     * @param pokemon Pokémon con los nuevos datos.
+     */
     fun updateRegistrados(conexion: Connection?, pokemon: Pokemon){
         val sql = "UPDATE REGISTRADOS SET tipo1 = ?, tipo2 = ? WHERE nombre = ?"
 

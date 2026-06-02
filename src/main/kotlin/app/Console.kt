@@ -28,6 +28,11 @@ object Console {
         return opcion
     }
 
+    /**
+     * Pide al usuario el nombre de un Pokémon y lo valida (no vacío, no blanco).
+     *
+     * @return el nombre introducido.
+     */
     fun solicitarNombrePokemon(): String {
 
         var nombre: String? = null
@@ -41,6 +46,12 @@ object Console {
         return nombre
     }
 
+    /**
+     * Pide los dos tipos del Pokémon. El primero se elige del enum [Tipo],
+     * el segundo debe ser distinto al primero (o [Tipo.False] si solo tiene un tipo).
+     *
+     * @return par (tipo1, tipo2).
+     */
     fun obtenerTipos(): Pair<Tipo, Tipo> {
         var tipo1: Tipo = Tipo.False
 
@@ -55,6 +66,11 @@ object Console {
         return tipos
     }
 
+    /**
+     * Pide al usuario qué lista quiere ver: registrados o capturados.
+     *
+     * @return "1" para registrados, "2" para capturados.
+     */
     fun solicitarLista(): String {
         var opcion: String? = null
         do {
@@ -71,6 +87,11 @@ object Console {
         return opcion
     }
 
+    /**
+     * Pide un ID numérico positivo validado con regex `^\d+$`.
+     *
+     * @return el ID introducido.
+     */
     fun solicitarId(): Int {
         val regexId = Regex("^\\d+$")
         var id: Int? = null
@@ -87,6 +108,12 @@ object Console {
         return id
     }
 
+    /**
+     * Muestra por consola todos los elementos de una lista,
+     * usando su método toString. Función genérica para cualquier tipo T.
+     *
+     * @param lista lista de elementos a mostrar.
+     */
     fun <T> mostrarTodos(lista: List<T>){
         lista.forEach {
             println(it)
@@ -94,6 +121,12 @@ object Console {
         println()
     }
 
+    /**
+     * Pide al usuario qué tipo de registro quiere hacer:
+     * solo Pokedex o Pokedex + captura.
+     *
+     * @return "1" solo Pokedex, "2" Pokedex + captura.
+     */
     fun solicitarTipoRegistro(): String {
         var opcion: String? = null
         do {
@@ -110,6 +143,11 @@ object Console {
         return opcion
     }
 
+    /**
+     * Pide al usuario el nombre de un objeto y lo valida (no vacío, no blanco).
+     *
+     * @return el nombre del objeto.
+     */
     fun solicitarNombreObjeto(): String {
 
         var nombre: String? = null
@@ -123,6 +161,11 @@ object Console {
         return nombre
     }
 
+    /**
+     * Pide una cantidad entre 1 y 99 validada con regex `^([1-9]|[1-9][0-9])`.
+     *
+     * @return la cantidad introducida.
+     */
     fun solicitarCantidad(): Int {
         val regexCantidad = Regex("^([1-9]|[1-9][0-9])")
         var cantidad: Int? = null

@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.3.0"
+    id("org.jetbrains.dokka") version "2.0.0"
 }
 
 group = "org.iesra"
@@ -23,4 +24,8 @@ kotlin {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
+    outputDirectory.set(file("documentacion"))
 }

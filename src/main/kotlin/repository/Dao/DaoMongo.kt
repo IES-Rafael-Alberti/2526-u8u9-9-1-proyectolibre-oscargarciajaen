@@ -34,6 +34,12 @@ class DaoMongo : Dao<Objeto, String>() {
         }
     }
 
+    /**
+     * Elimina un objeto de la colección "Objetos" por su nombre.
+     *
+     * @param database base de datos MongoDB activa.
+     * @param nombre nombre del objeto a eliminar.
+     */
     fun eliminarObjeto(database: MongoDatabase?, nombre: String) {
         if (database != null) {
             val coleccion: MongoCollection<Document> = database.getCollection("Objetos")
@@ -46,6 +52,13 @@ class DaoMongo : Dao<Objeto, String>() {
         }
     }
 
+    /**
+     * Actualiza la cantidad de un objeto en la colección "Objetos".
+     *
+     * @param database base de datos MongoDB activa.
+     * @param nombre nombre del objeto a actualizar.
+     * @param cantidad nueva cantidad.
+     */
     fun actualizarCantidad(database: MongoDatabase?,nombre: String, cantidad: Int) {
         if (database != null) {
             val coleccion: MongoCollection<Document> = database.getCollection("Objetos")
@@ -60,6 +73,12 @@ class DaoMongo : Dao<Objeto, String>() {
         }
     }
 
+    /**
+     * Obtiene todos los objetos almacenados en la colección "Objetos".
+     *
+     * @param database base de datos MongoDB activa.
+     * @return lista de objetos encontrados.
+     */
     fun obtenerTodos(database: MongoDatabase?): List<Objeto> {
         val listaObjetos = mutableListOf<Objeto>()
         if (database != null) {
