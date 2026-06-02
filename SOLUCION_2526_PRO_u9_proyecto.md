@@ -138,16 +138,23 @@
 
 - **Excepciones controladas:**
   - `SQLException` en `DaoSQL` – capturada en cada método, imprime mensaje de error y continúa 
+    - DaoSql : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/36c2ca4817b8cbcc1361f6953f5af7bac421c7aa/src/main/kotlin/repository/Dao/DaoSQL.kt#L9-L227
   - `Exception` en `DaoCsv.leerObjetos()` – si falla la lectura del CSV, devuelve lista vacía
+    - DaoCsv : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/36c2ca4817b8cbcc1361f6953f5af7bac421c7aa/src/main/kotlin/repository/Dao/DaoCsv.kt#L12-L44
   - `Exception` en `DaoTxt` – si falla la operación con ficheros, imprime error
+    - DaoTxt : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/36c2ca4817b8cbcc1361f6953f5af7bac421c7aa/src/main/kotlin/repository/Dao/DaoTxt.kt#L15-L76
   - `Exception` en `DaoMongo` – capturada en cada operación e imprime error.
+    - DaoMongo : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/36c2ca4817b8cbcc1361f6953f5af7bac421c7aa/src/main/kotlin/repository/Dao/DaoMongo.kt#L16-L92
   - `SQLException` en `H2ConnectionManager` – si falla la conexión, imprime error.
+    - https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/36c2ca4817b8cbcc1361f6953f5af7bac421c7aa/src/main/kotlin/util/H2ConnectionManager.kt#L7-L64
 
 ## 6. Pruebas y evidencias
 
 - **Pruebas automatizadas:** 4 tests en `kotlin.test`
   - `PokemonTest` (3 tests): `toString` sin id, `toString` con id, `id` null tras crear
+    - PokemonTest : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/36c2ca4817b8cbcc1361f6953f5af7bac421c7aa/src/test/kotlin/model/PokemonTest.kt#L7-L33
   - `ObjetoTest` (1 test): `toString` formateado
+    - ObjetoTest : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/36c2ca4817b8cbcc1361f6953f5af7bac421c7aa/src/test/kotlin/model/ObjetoTest.kt#L6-L16
 - **Datos de prueba:** `objetos.csv` con 11 líneas de objetos en formato `nombre|cantidad`
 - **Evidencia de ejecución:** <!-- Salida de consola o captura -->
 - **Evidencia de ficheros:** <!-- Fichero generado/leído -->
