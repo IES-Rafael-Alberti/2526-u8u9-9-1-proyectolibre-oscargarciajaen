@@ -6,9 +6,9 @@
 
 ## 1. Resumen del proyecto
 
-- **Problema que resuelve:** <!-- Explicación breve --> Te permite mantener un control de los Pokemon capturados, avistados y objetos adquiridos, ademas de la creacion de generar equipos aleatorios a partir de los Pokemon captruados.
-- **Usuarios principales:** <!-- A quién va dirigido --> Principalmente este programa va dirigidos a los jugadores de la franquicia Pokémon.
-- **Funcionalidades principales:** <!-- Lista breve --> 
+- **Problema que resuelve:** Te permite mantener un control de los Pokemon capturados, avistados y objetos adquiridos, ademas de la creacion de generar equipos aleatorios a partir de los Pokemon captruados.
+- **Usuarios principales:** Principalmente, este programa va dirigidos a los jugadores de la franquicia Pokémon.
+- **Funcionalidades principales:**
   - Registrar Pokémon
   - Actualizar Pokémon
   - Eliminar Pokémon
@@ -34,7 +34,7 @@
 
 ```bash
 # Comandos necesarios para ejecutar el proyecto
-./gradlew run
+./run.sh
 ```
 
 - **Requisitos previos:** JDK 21+, MongoDB Atlas (o instancia local) con cadena de conexión
@@ -282,22 +282,22 @@ Justificación: separación de responsabilidades y facilidad de mantenimiento.
 
 Indica en cada criterio el nivel o puntuación que consideras que has alcanzado. Usa la escala de la guía de evaluación: `0`, `2.5`, `5`, `7.5` o `10`. Justifica siempre la puntuación con evidencias concretas: clases, funciones, commits, capturas, documentación o enlaces al código.
 
-### 11.1. Programación
+### 11.1 Programacion
 
-| Criterio | Puntuación/Nivel | Justificación de la puntuación |
-|----------|------------------|--------------------------------|
-| Completitud de requisitos mínimos | <!-- 0 / 2.5 / 5 / 7.5 / 10 --> | <!-- Justifica el cumplimiento de POO, colecciones, genéricos, herencia/interfaces, regex, excepciones, SOLID, librerías, pruebas y evidencias. --> |
-| Acceso a ficheros | <!-- 0 / 2.5 / 5 / 7.5 / 10 --> | <!-- Indica ficheros usados, formato, operaciones de lectura/escritura, clase responsable y control de errores. --> |
-| Integración de MongoDB | <!-- 0 / 2.5 / 5 / 7.5 / 10 --> | <!-- Indica base de datos, colecciones, documentos, operaciones y clase responsable. --> |
-| Base de datos relacional y operaciones CRUD | <!-- 0 / 2.5 / 5 / 7.5 / 10 --> | <!-- Indica SGBD, tablas, relaciones, script SQL, CRUD, conexión, cierre de recursos y consultas parametrizadas. --> |
-| Preguntas de evaluación de Programación | <!-- 0 / 2.5 / 5 / 7.5 / 10 --> | <!-- Justifica si las respuestas de Programación están completas, son técnicas e incluyen enlaces y evidencias. --> |
+| Criterio | Puntuación | Justificación                                                                                                                   |
+|---|-----------:|---------------------------------------------------------------------------------------------------------------------------------|
+| Completitud requisitos mínimos |        7.5 | POO aplicada con clases, herencia, interfaces, genéricos, colecciones, regex, excepciones, SOLID, librerías externas y pruebas. |
+| Acceso a ficheros |        7.5 | Uso de 3 ficheros (CSV, TXT), lectura y escritura, control de errores.                                                          |
+| Integración MongoDB |        7.5 | CRUD completo en MongoDB, conexión desde fichero de configuración.                                                              |
+| BD relacional y CRUD |        7.5 | H2 con dos tablas relacionadas, CRUD completo, consultas parametrizadas con `PreparedStatement`, cierre de recursos con `.use`. |
+| Preguntas evaluación Programación |        7.5 | Preguntas respondidas con enlaces permanentes.                                                                                  |
 
 ### 11.2. Entornos de Desarrollo
 
-| Criterio | Puntuación/Nivel | Justificación de la puntuación |
-|----------|------------------|--------------------------------|
-| Refactorización y código limpio | <!-- 0 / 2.5 / 5 / 7.5 / 10 --> | <!-- Refactorizaciones, técnicas aplicadas, mejoras y ejemplos. --> |
-| Patrones de diseño | <!-- 0 / 2.5 / 5 / 7.5 / 10 --> | <!-- Patrón usado, ubicación, problema resuelto y ventaja. --> |
-| Documentación | <!-- 0 / 2.5 / 5 / 7.5 / 10 --> | <!-- Herramientas, partes documentadas, formato y ejemplo. --> |
-| Control de versiones | <!-- 0 / 2.5 / 5 / 7.5 / 10 --> | <!-- Commits, ramas, repositorio, conflictos si existen e historial. --> |
-| Preguntas de evaluación de Entornos de Desarrollo | <!-- 0 / 2.5 / 5 / 7.5 / 10 --> | <!-- Justifica si las respuestas de Entornos están completas, son técnicas e incluyen enlaces y evidencias. --> |
+| Criterio | Puntuación/Nivel | Justificación de la puntuación                                                              |
+|----------|------------------|---------------------------------------------------------------------------------------------|
+| Refactorización y código limpio | 7.5              | Separación en capas, genéricos para evitar duplicación, SRP aplicado, nombres descriptivos. |
+| Patrones de diseño | 7.5              | DAO, Repository y Singleton aplicados correctamente.                                        |
+| Documentación | 7.5              | Documentado con dokka.                                                                      |
+| Control de versiones | 5                | Registro de commits con la linea de vida de mi proyecto                                     |
+| Preguntas evaluación Entornos | 7.5              | Preguntas respondidas con enlaces permanentes.                                              |
