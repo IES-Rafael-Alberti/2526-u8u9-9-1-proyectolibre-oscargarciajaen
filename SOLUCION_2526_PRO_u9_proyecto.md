@@ -23,12 +23,12 @@
   - Objeto (data class) - representa un objeto con nombre y cantidad : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/model/Objeto.kt#L3-L14
   - Tipo (enum) - enum con los 18 tipos de Pokémon + False para los Pokémon con 1 solo tipo : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/3a86d1c2d439da4bf06137cc6fa5c1e07eccf904/src/main/kotlin/model/Tipo.kt#L3-L27
 - **Estructura del proyecto:** 
-  - model/ - clases del dominio (Pokemon, objeto, tipo)
-  - respository/Dao/ - capa de acceso a datos con genéricos (Dao<T, ID> abstracto, DaoSQL, DaoMongo, DaoCsv, DaoTxt)
-  - repository/ - interfaces de repositorio (IRepositorySQL), IRepositoryMongo, IRepositoryTxt) y sus implementaciones (RepositorioSQL, RepositorioMongo, RepositorioTxt)
-  - service/ - logica de negocio (PokedexService)
-  - app/ - interfaz de consola (Console)
-  - util/ - gestores de conexión (H2ConnectionManager, MongoConecctionManager)
+  - model/ - clases del dominio (Pokemon, objeto, tipo) : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/tree/main/src/main/kotlin/model
+  - respository/Dao/ - capa de acceso a datos con genéricos (Dao<T, ID> abstracto, DaoSQL, DaoMongo, DaoCsv, DaoTxt) : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/tree/main/src/main/kotlin/repository/Dao
+  - repository/ - interfaces de repositorio (IRepositorySQL), IRepositoryMongo, IRepositoryTxt) y sus implementaciones (RepositorioSQL, RepositorioMongo, RepositorioTxt) : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/tree/main/src/main/kotlin/repository
+  - service/ - logica de negocio (PokedexService) : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/tree/main/src/main/kotlin/service
+  - app/ - interfaz de consola (Console) : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/tree/main/src/main/kotlin/app
+  - util/ - gestores de conexión (H2ConnectionManager, MongoConecctionManager) : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/tree/main/src/main/kotlin/util
 
 ## 2. Instalación y ejecución
 
@@ -156,23 +156,29 @@
   - `ObjetoTest` (1 test): `toString` formateado
     - ObjetoTest : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/36c2ca4817b8cbcc1361f6953f5af7bac421c7aa/src/test/kotlin/model/ObjetoTest.kt#L6-L16
 - **Datos de prueba:** `objetos.csv` con 11 líneas de objetos en formato `nombre|cantidad`
-- **Evidencia de ejecución:** <!-- Salida de consola o captura -->
-- **Evidencia de ficheros:** <!-- Fichero generado/leído -->
-- **Evidencia de MongoDB:** <!-- Inserción/consulta -->
-- **Evidencia de SQL:** <!-- CRUD realizado -->
-
+  - https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/main/src/main/kotlin/data/csv/objetos.csv
+- **Evidencia de ejecución:** 
+  - ![img.png](assets/evidenciaEjecucion.png)
+- **Evidencia de ficheros:** 
+  - ![img.png](assets/EvidenciaFichero.png)
+- **Evidencia de MongoDB:** 
+  - ![img.png](assets/EvidenciaMongo.png)
+- **Evidencia de SQL:**
+  - ![EvidenciaSql.png](assets/EvidenciaSql.png)
+  
 ## 7. Refactorización, documentación y Git
 
-- **Refactorizaciones aplicadas:** Separación en capas (`model` → `repository/Dao` → `repository` → `service` → `app`), uso de genéricos en `Dao<T, ID>` para evitar duplicación, interfaces de repositorio para desacoplar
+- **Refactorizaciones aplicadas:** Division de la función ejecutar en un conjunto de subfunciones privadas para que el código sea más legible y mejorable en el tiempo.
+  - https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/service/PokedexService.kt#L12-L216
 - **Código limpio:** Nombres descriptivos en clases y métodos, responsabilidades únicas (SRP), uso de `data class` para entidades
 - **Documentación:** Se ha generado documentación HTML con **Dokka** a partir de comentarios **KDoc** añadidos a todas las clases, funciones y propiedades del proyecto. La documentación se genera ejecutando `./gradlew dokkaHtml` y se encuentra en la carpeta `documentacion/`. Cubre todos los paquetes: `model`, `app`, `service`, `repository`, `repository.Dao` y `util`.
-- **Control de versiones:** Historial de commits en la rama principal.
+- **Control de versiones:** Historial de commits que permiten ver la línea de vida del proyecto a lo largo de los mismos.
 
 ## 8. Problemas encontrados y soluciones
 
-| Problema                                 | Solución aplicada                              | Enlace o evidencia |
-|------------------------------------------|------------------------------------------------|--------------------|
-| Tenia los datos para acceder a la Mongo. | Introducirlos en un txt desde el cual se leen. | X                  |
+| Problema                                                                 | Solución aplicada                              | Enlace o evidencia |
+|--------------------------------------------------------------------------|------------------------------------------------|----------------|
+| Tenia los datos para acceder a la Mongo hardcodeados en la propia clase. | Introducirlos en un txt desde el cual se leen. | https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/main/src/main/kotlin/data/txt/mongo_config.txt#L1               |
 
 ## 9. Respuestas a los criterios de evaluación
 
@@ -186,74 +192,95 @@ Justificación: separación de responsabilidades y facilidad de mantenimiento.
 
 ### 9.2. Clases y objetos
 
-- **Pokemon**: data class con propiedades `nombre`, `tipo1`, `tipo2`, `id`, dos constructores (primario y secundario con `id`)
-- **Objeto**: data class con `nombre` y `cantidad`
-- **Tipo**: enum con 19 valores
-- **Console**: object con métodos `solicitarOpcion()`, `solicitarNombrePokemon()`, `solicitarId()`, `solicitarCantidad()`, `mostrarTodos()`, etc.
-- **PokedexService**: object con métodos `ejecutar()`, `registrar()`, `eliminar()`, `actualizarPokemon()`, `obtenerLista()`, `ingresarObjeto()`, etc.
+- **Pokemon**: data class con propiedades `nombre`, `tipo1`, `tipo2`, `id`, dos constructores (primario y secundario con `id`) : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/model/Pokemon.kt#L3-L29
+- **Objeto**: data class con `nombre` y `cantidad` : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/model/Objeto.kt#L3-L14
+- **Tipo**: enum con 19 valores : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/model/Tipo.kt#L3-L27
+- **Console**: object con métodos `solicitarOpcion()`, `solicitarNombrePokemon()`, `solicitarId()`, `solicitarCantidad()`, `mostrarTodos()`, etc. : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/app/Console.kt#L5-L272
+- **PokedexService**: object con métodos `ejecutar()`, `registrar()`, `eliminar()`, `actualizarPokemon()`, `obtenerLista()`, `ingresarObjeto()`, etc. : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/service/PokedexService.kt#L12-L216
 
 ### 9.3. Encapsulación y visibilidad
 
-- **Console** usa métodos públicos (`solicitarOpcion`, `solicitarNombrePokemon`, etc.) y privados (`mostrarMenu`, `solicitarTipo`).
-- **DaoTxt** tiene `rutaMongoConfig` como propiedad privada (`val` inmutable).
-- **RepositoryMongo** tiene `connectionManager` y `daoMongo` como propiedades privadas.
+- **Console** usa métodos públicos (`solicitarOpcion`, `solicitarNombrePokemon`, etc.) y privados (`mostrarMenu`, `solicitarTipo`). : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/app/Console.kt#L5-L272
+- **DaoTxt** tiene `rutaMongoConfig` como propiedad privada (`val` inmutable). : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoTxt.kt#L7-L77
+- **RepositoryMongo** tiene `connectionManager` y `daoMongo` como propiedades privadas. : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/RepositorioMongo.kt#L7-L53
 - Las clases de modelo usan `data class` con propiedades públicas, inmutables por defecto con `val`.
 
 ### 9.4. Colecciones
 
 - `MutableList<Pokemon>` en `DaoSQL` para resultados de consultas, porque permite añadir elementos dinámicamente. Justificación: se necesita construir la lista incrementalmente al recorrer el `ResultSet`.
+  - DaoSQL : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoSQL.kt#L96
 - `MutableList<Objeto>` en `DaoCsv` y `DaoMongo`, por el mismo motivo.
+  - DaoCsv : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoCsv.kt#L20
+  - DaoMongo : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoMongo.kt#L83
 - `MutableList<Pokemon>` y `MutableList<Int>` en `PokedexService.crearEquipo()` para generar un equipo aleatorio de hasta 6 Pokémon; la lista de índices permite selección sin repetición.
+  - https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/service/PokedexService.kt#L180-L216
 
 ### 9.5. Genéricos
 
 ## 9.5 Genéricos
 
 - `Dao<T, ID>`: clase abstracta genérica que permite reutilizar la misma jerarquía para distintas entidades y tipos de ID. `DaoSQL : Dao<Pokemon, Int>`, `DaoCsv : Dao<Objeto, String>`, `DaoTxt : Dao<Pokemon, String>`, `DaoMongo : Dao<Objeto, String>`.
+  - Dao genérico: https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/Dao.kt#L3-L16
+  - DaoSQL : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoSQL.kt#L9-L227
+  - DaoCsv : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoCsv.kt#L6-L44
+  - DaoTxt : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoTxt.kt#L7-L77
+  - DaoMongo : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoMongo.kt#L10-L93
 - `Console.mostrarTodos<T>(lista: List<T>)`: función genérica que imprime cualquier tipo de lista, evitando duplicar código para listas de Pokémon y de objetos.
+  - https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/app/Console.kt#L111-L122
 
 ### 9.6. Herencia, interfaces o clases abstractas
 
 - `Dao<T, ID>` es clase abstracta de la que heredan `DaoSQL`, `DaoCsv`, `DaoTxt`, `DaoMongo`. Ventaja: polimorfismo y código común.
+  - Dao genérico: https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/Dao.kt#L3-L16
+  - DaoSQL : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoSQL.kt#L9-L227
+  - DaoCsv : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoCsv.kt#L6-L44
+  - DaoTxt : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoTxt.kt#L7-L77
+  - DaoMongo : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoMongo.kt#L10-L93
 - `IRepositorySQL`, `IRepositoryMongo`, `IRepositoryTxt` son interfaces implementadas por `RepositorioSQL`, `RepositorioMongo`, `RepositorioTxt`. Ventaja: `PokedexService` programa contra interfaces, no contra implementaciones concretas (DIP).
+  - IRepositorySQL : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/IRepositorySQL.kt#L5-L29
+  - IRepositoryMongo : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/IRepositoryMongo.kt#L6-L30
+  - IRepositoryTxt : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/IRepositoryTxt.kt#L5-L21
+  - RepositorioSQL : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/RepositorioSQL.kt#L7-L64
+  - RepositorioMongo : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/RepositorioMongo.kt#L7-L53
+  - RepositorioTxt : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/RepositorioTxt.kt#L6-L29
 
 ### 9.7. Expresiones regulares
 
-- `^\d+$` en `Console.solicitarId()` valida un ID numérico positivo. Ej.: válido `42`, inválido `-3`.
-- `^[1-9][1-9][0-9]` en `Console.solicitarCantidad()` valida cantidad 1-99. Ej.: válido `15`, inválido `0`.
+- `^\d+$` en `Console.solicitarId()` valida un ID numérico positivo. Ej.: válido `42`, inválido `-3`. : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/app/Console.kt#L90-L109
+- `^[1-9][1-9][0-9]` en `Console.solicitarCantidad()` valida cantidad 1-99. Ej.: válido `15`, inválido `0`. : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/app/Console.kt#L164-L182
 - 
 ### 9.8. Ficheros
 
-- `DaoCsv.leerObjetos()`: lee `objetos.csv` con `useLines`, separa por `|`, crea objetos `Objeto`.
-- `DaoTxt.crear()`: crea `equipo.txt` con `File.createNewFile()` y `mkdirs()` para directorios padres.
-- `DaoTxt.guardar()`: lee líneas existentes con `readLines()`, añade nuevas, escribe con `writeText()`.
-- `DaoTxt.leerConexionMongo()`: lee `mongo_config.txt` con `readLines()`, devuelve primera línea no vacía.
+- `DaoCsv.leerObjetos()`: lee `objetos.csv` con `useLines`, separa por `|`, crea objetos `Objeto`. : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoCsv.kt#L12-L44
+- `DaoTxt.crear()`: crea `equipo.txt` con `File.createNewFile()` y `mkdirs()` para directorios padres. : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoTxt.kt#L15-L31
+- `DaoTxt.guardar()`: lee líneas existentes con `readLines()`, añade nuevas, escribe con `writeText()`. : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoTxt.kt#L33-L54
+- `DaoTxt.leerConexionMongo()`: lee `mongo_config.txt` con `readLines()`, devuelve primera línea no vacía. : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoTxt.kt#L56-L76
 - Control de errores: try-catch con `Exception` genérica en ambos DAOs.
 
 ### 9.9. MongoDB
 
-- Base de datos: `proyecto`, colección: `Objetos`
+- Base de datos: `proyecto`, colección: `Objetos` : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/util/MongoConecctionManager.kt#L11-L52
 - Documento: `{ nombre: "Poke Ball", cantidad: 10 }`
-- Operaciones en `DaoMongo`: `guardarObjeto()` , `eliminarObjeto()` , `actualizarCantidad()` , `obtenerTodos()` 
-- `MongoConnectionManager.obtenerMongoDB()`: lee URI de `mongo_config.txt`, crea cliente con `MongoClients.create()`
+- Operaciones en `DaoMongo`: `guardarObjeto()` , `eliminarObjeto()` , `actualizarCantidad()` , `obtenerTodos()` : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoMongo.kt#L16-L92
+- `MongoConnectionManager.obtenerMongoDB()`: lee URI de `mongo_config.txt`, crea cliente con `MongoClients.create()` : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/util/MongoConecctionManager.kt#L11-L52
 
 ### 9.10 Base de datos relacional (H2)
 
 - SGBD: H2 en modo fichero, conexión `jdbc:h2:file:./src/main/kotlin/data/bd/pokemon`
-- Tablas: `CAPTURADOS` (id `AUTO_INCREMENT`, nombre, tipo1, tipo2) y `REGISTRADOS` (nombre PK, tipo1, tipo2)
-- Creación de tablas en `H2ConnectionManager.createTables()` con `CREATE TABLE IF NOT EXISTS`
-- CRUD en `DaoSQL`: `saveAvistado()/saveCaptura()`, `listarPokemonRegistrados()/listarPokemonCapturados()` , `update()/updateRegistrados()`, `liberarPokemonCapturado()`
-- Consultas parametrizadas con `PreparedStatement` (ej. `DELETE FROM CAPTURADOS WHERE ID = ?`)
-- Conexión gestionada por `H2ConnectionManager.create()`, cierre al finalizar `PokedexService.ejecutar()`
+- Tablas: `CAPTURADOS` (id `AUTO_INCREMENT`, nombre, tipo1, tipo2) y `REGISTRADOS` (nombre PK, tipo1, tipo2) : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/util/H2ConnectionManager.kt#L33-L63
+- Creación de tablas en `H2ConnectionManager.createTables()` con `CREATE TABLE IF NOT EXISTS` : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/util/H2ConnectionManager.kt#L33-L63
+- CRUD en `DaoSQL`: `saveAvistado()/saveCaptura()`, `listarPokemonRegistrados()/listarPokemonCapturados()` , `update()/updateRegistrados()`, `liberarPokemonCapturado()` : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoSQL.kt#L15-L226
+- Consultas parametrizadas con `PreparedStatement` (ej. `DELETE FROM CAPTURADOS WHERE ID = ?`) : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoSQL.kt#L22
+- Conexión gestionada por `H2ConnectionManager.create()`, cierre al finalizar `PokedexService.ejecutar()` 
 - `PreparedStatement` auto-cerrados con `.use {}`
 
 ### 9.11 Excepciones
 
-- `SQLException` capturada en todos los métodos de `DaoSQL` — imprime mensaje y continúa la ejecución
-- `Exception` en `DaoCsv` — si falla lectura de CSV, devuelve lista vacía
-- `Exception` en `DaoTxt` — si falla operación de fichero, imprime error
-- `Exception` en `DaoMongo` — capturada en cada operación, imprime error
-- `SQLException` en `H2ConnectionManager` — si falla conexión/creación de tablas, imprime error
+- `SQLException` capturada en todos los métodos de `DaoSQL` — imprime mensaje y continúa la ejecución : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoSQL.kt#L34-L36
+- `Exception` en `DaoCsv` — si falla lectura de CSV, devuelve lista vacía : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoCsv.kt#L38-L40
+- `Exception` en `DaoTxt` — si falla operación de fichero, imprime error : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoTxt.kt#L28-L30
+- `Exception` en `DaoMongo` — capturada en cada operación, imprime error : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/DaoMongo.kt#L31-L34
+- `SQLException` en `H2ConnectionManager` — si falla conexión/creación de tablas, imprime error : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/util/H2ConnectionManager.kt#L59-L61
 
 ### 9.12 SOLID y buenas prácticas
 
@@ -264,16 +291,16 @@ Justificación: separación de responsabilidades y facilidad de mantenimiento.
 
 ### 9.13 Librerías externas
 
-- `kotlin("test")` — framework de tests JUnit Platform
+- `kotlin("test")` — framework de tests JUnit Platform 
 - `com.h2database:h2:2.2.224` — base de datos H2 embebida
 - `org.mongodb:mongodb-driver-sync:5.1.0` — driver oficial de MongoDB para operaciones síncronas
 
 ### 9.14 Pruebas y evidencias
 
 - 4 tests automatizados con `kotlin.test`:
-  - `PokemonTest` (3 tests) — verifica `toString()` y `id` inicial
-  - `ObjetoTest` (1 test) — verifica `toString()` formateado
-- Datos de prueba: `objetos.csv` con 11 objetos precargados
+  - `PokemonTest` (3 tests) — verifica `toString()` y `id` inicial : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/test/kotlin/model/PokemonTest.kt#L7-L33
+  - `ObjetoTest` (1 test) — verifica `toString()` formateado : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/test/kotlin/model/ObjetoTest.kt#L6-L16
+- Datos de prueba: `objetos.csv` con 11 objetos precargados : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/data/csv/objetos.csv#L1-L11
 
 ### 9.15 Refactorización y código limpio
 
@@ -281,12 +308,15 @@ Justificación: separación de responsabilidades y facilidad de mantenimiento.
 - Uso de genéricos en `Dao<T, ID>` para evitar duplicación de CRUD
 - Nombres de métodos descriptivos: `saveAvistado`, `liberarPokemonCapturado`, `leerConexionMongo`
 - Variables y funciones con nombre auto-explicativo
-- Uso de `data class` que proporciona `toString`, `equals`, `hashCode` automáticos
+- Uso de `data class` que proporciona `toString` automáticos
 
 ### 9.16 Patrones de diseño
 
-- **DAO** (`Data Access Object`): `Dao<T, ID>` y subclases encapsulan la lógica de acceso a datos. Problema: aislar la capa de persistencia del resto de la aplicación. Ventaja: si cambia el motor de BD, solo se modifica el DAO correspondiente.
+- **DAO** (`Data Access Object`): `Dao<T, ID>` y subclases encapsulan la lógica de acceso a datos. Problema: aislar la capa de persistencia del resto de la aplicación. Ventaja: si cambia el motor de BD, solo se modifica el DAO correspondiente. : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/Dao/Dao.kt#L3-L16
 - **Repository**: `RepositorioSQL`, `RepositorioMongo`, `RepositorioTxt` median entre servicio y DAOs. Ventaja: abstracción adicional que permite cambiar implementaciones sin afectar al servicio.
+  - RepositorioSQL : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/RepositorioTxt.kt#L6-L29
+  - RepositorioMongo : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/RepositorioMongo.kt#L7-L53
+  - RepositorioTxt : https://github.com/IES-Rafael-Alberti/2526-u8u9-9-1-proyectolibre-oscargarciajaen/blob/bfa48dfa0ec1dcc5d9575f2d214ab6dc868e3c70/src/main/kotlin/repository/RepositorioTxt.kt#L6-L29
 - **Singleton**: `Console` y `PokedexService` como `object` de Kotlin. Ventaja: instancia única global sin necesidad de pasar referencias.
 
 ### 9.17. Documentación
@@ -308,8 +338,8 @@ Justificación: separación de responsabilidades y facilidad de mantenimiento.
 ## 10. Conclusiones
 
 - **Qué he aprendido:** He aprendido a hacer una aplicación con varios sistemas de persistencia de forma simultánea. 
-- **Qué mejoraría si tuviera más tiempo:** Mejoraria un poco la idea principal gestionando mejor que tipo de información guardo en cada sistema.
-- **Decisión técnica más importante:** Utilizar la clase generica `Dao<T, ID>` permitiendo reutilizar el diseño del dao sin duplicar código.
+- **Qué mejoraría si tuviera más tiempo:** Mejoraría un poco la idea principal gestionando mejor que tipo de información guardo en cada sistema.
+- **Decisión técnica más importante:** Utilizar la clase genérica `Dao<T, ID>` permitiendo reutilizar el diseño del dao sin duplicar código.
 
 ## 11. Autoevaluación
 
@@ -331,6 +361,6 @@ Indica en cada criterio el nivel o puntuación que consideras que has alcanzado.
 |----------|------------------|---------------------------------------------------------------------------------------------|
 | Refactorización y código limpio | 7.5              | Separación en capas, genéricos para evitar duplicación, SRP aplicado, nombres descriptivos. |
 | Patrones de diseño | 7.5              | DAO, Repository y Singleton aplicados correctamente.                                        |
-| Documentación | 7.5              | Documentado con dokka.                                                                      |
+| Documentación | 7.5              | Documentación generada con dokka.                                                           |
 | Control de versiones | 5                | Registro de commits con la linea de vida de mi proyecto                                     |
 | Preguntas evaluación Entornos | 7.5              | Preguntas respondidas con enlaces permanentes.                                              |
